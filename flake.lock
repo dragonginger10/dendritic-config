@@ -508,6 +508,7 @@
         "packages": "packages",
         "pkgs-by-name": "pkgs-by-name",
         "ragenix": "ragenix",
+        "secrets": "secrets",
         "stylix": "stylix",
         "treefmt-nix": "treefmt-nix"
       }
@@ -532,6 +533,18 @@
         "repo": "rust-overlay",
         "type": "github"
       }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "path": "./secrets",
+        "type": "path"
+      },
+      "original": {
+        "path": "./secrets",
+        "type": "path"
+      },
+      "parent": []
     },
     "stylix": {
       "inputs": {

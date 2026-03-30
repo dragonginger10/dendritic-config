@@ -26,7 +26,6 @@
         environment.systemPackages = with pkgs; [
           bat
           btop
-          df
           duf
           dust
           fzf
@@ -44,6 +43,7 @@
           wget
           yazi
           zip
+          zoxide
         ];
 
         environment.shells = [ cfg.shell ] ++ cfg.extraShells;

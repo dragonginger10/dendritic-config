@@ -20,7 +20,6 @@
       imports = [
         inputs.nixos-wsl.nixosModules.wsl
         self.modules.nixos.base
-        self.modules.nixos.nix
         self.modules.nixos.environment
       ];
 

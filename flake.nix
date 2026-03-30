@@ -20,6 +20,10 @@
     };
     pkgs-by-name.url = "github:drupol/pkgs-by-name-for-flake-parts";
     ragenix.url = "github:yaxitech/ragenix";
+    secrets = {
+      url = "path:./secrets";
+      flake = false;
+    };
     stylix.url = "github:nix-community/stylix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };

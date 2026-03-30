@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.modules.nixos.base =
-    { lib, config, ... }:
+    { config, lib, ... }:
     {
       imports = [ self.modules.nixos.ragenix ];
       options.preferences = {

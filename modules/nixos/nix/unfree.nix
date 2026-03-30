@@ -13,5 +13,5 @@
       nixpkgs.config.allowUnfreePredicate = predicate;
     };
 
-  config.flake.modules.unfree = config.nixpkgs.allowedUnfreePackages;
+  config.flake.unfree = config.nixpkgs.allowedUnfreePackages;
 }
