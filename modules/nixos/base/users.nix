@@ -4,12 +4,14 @@
     { config, lib, ... }:
     {
       imports = [ self.modules.nixos.ragenix ];
+
       options.preferences = {
         user.name = lib.mkOption {
           type = lib.types.str;
           default = "dragon";
         };
       };
+
       config = {
         users.mutableUsers = false;
         users.users.${config.preferences.user.name} = {

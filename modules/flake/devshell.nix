@@ -12,7 +12,6 @@
           just
           nixd
           statix
-          statix
           home-manager
           jujutsu
         ];
