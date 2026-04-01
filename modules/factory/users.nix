@@ -11,9 +11,9 @@
       {
         imports = [
           self.modules.nixos.ragenix
-          self.modules.general.constants
+          self.modules.generic.constants
         ];
-        preferneces.users.name = "${username}";
+        preferences.user.name = "${username}";
         users.mutableUsers = false;
         users.users.${username} = {
           hashedPasswordFile = config.age.secrets.sneaky.path;
