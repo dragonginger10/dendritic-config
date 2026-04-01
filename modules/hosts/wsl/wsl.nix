@@ -12,11 +12,12 @@
     { config, ... }:
     {
       nixpkgs.hostPlatform = "x86_64-linux";
-      imports = [
+      imports = with self.modules.nixos; [
         inputs.nixos-wsl.nixosModules.wsl
 
-        self.modules.nixos.base
-        self.modules.nixos.nix
+        base
+        nix
+        dragon
       ];
 
       wsl = {

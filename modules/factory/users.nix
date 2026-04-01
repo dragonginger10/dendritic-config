@@ -9,16 +9,22 @@
         ...
       }:
       {
-        imports = [ self.modules.nixos.ragenix ];
+        imports = [
+          self.modules.nixos.ragenix
+          self.modules.general.constants
+        ];
+        preferneces.users.name = "${username}";
         users.mutableUsers = false;
         users.users.${username} = {
           hashedPasswordFile = config.age.secrets.sneaky.path;
           isNormalUser = true;
           home = "/home/${username}";
-          extraGroups = lib.optionals isAdmin [
-            "wheel"
+          extraGroups = [
             "storage"
             "audio"
+          ]
+          ++ lib.optionals isAdmin [
+            "wheel"
             "docker"
           ];
         };
