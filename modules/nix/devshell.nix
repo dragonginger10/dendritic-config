@@ -2,7 +2,12 @@
 {
   # imports = [];
   perSystem =
-    { pkgs, system,config, ... }:
+    {
+      pkgs,
+      system,
+      config,
+      ...
+    }:
     {
       devShells.default = pkgs.mkShell {
         NIX_CONFIG = "experimental-features = nix-command flakes pipe-operators";
