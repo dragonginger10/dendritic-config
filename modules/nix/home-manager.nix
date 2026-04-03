@@ -23,7 +23,7 @@ in
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  imports = [ inputs.home-manager.flakeModules.home-manager ];
+  # imports = [ inputs.home-manager.flakeModules.home-manager ];
 
   flake.modules.nixos.home-manager = {
     imports = [
