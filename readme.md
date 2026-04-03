@@ -3,4 +3,4 @@
 - [ ] home-manager integration
 - [ ] minimal phos setup
 - [ ] minimal VM setup
-- [ ] swap from user module to factory
+- [X] swap from user module to factory
