@@ -18,12 +18,14 @@
         base
         nix
         dragon
+        editors
       ];
 
       wsl = {
         enable = true;
         defaultUser = config.preferences.user.name;
       };
+      editors.alternatives.enable = true;
 
       system.stateVersion = "25.11";
     };
