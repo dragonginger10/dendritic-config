@@ -7,11 +7,11 @@
       ...
     }:
     let
-      cfg = config.myShell;
+      cfg = config.preferences.shell;
     in
     {
-      options.myShell = with lib; {
-        shell = mkOption {
+      options.preferences.shell = with lib; {
+        default = mkOption {
           type = types.package;
           default = pkgs.nushell;
         };
@@ -46,9 +46,9 @@
           zoxide
         ];
 
-        environment.shells = [ cfg.shell ] ++ cfg.extraShells;
+        environment.shells = [ cfg.default ] ++ cfg.extraShells;
 
-        users.defaultUserShell = cfg.shell;
+        users.defaultUserShell = cfg.default;
       };
     };
 }

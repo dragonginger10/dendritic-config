@@ -30,8 +30,6 @@
         };
       };
 
-    home-manager.users."${username}" = {
-      imports = [ self.modules.homeManager."${username}" ];
-    };
+    home-manager.users."${username}".imports = [ self.modules.homeManager."${username}" ];
   };
 }

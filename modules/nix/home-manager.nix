@@ -14,6 +14,8 @@ let
         backupFileExtension = "backup";
         backupCommand = "rm";
         overwriteBackup = true;
+        home.stateVersion = "25.05";
+        programs.home-manager.enable = true;
       };
     };
 in
