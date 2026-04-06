@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.homeManager.shell.imports = with self.module.homeManager; [
+  flake.modules.homeManager.shell.imports = with self.modules.homeManager; [
     nushell
     git
   ];

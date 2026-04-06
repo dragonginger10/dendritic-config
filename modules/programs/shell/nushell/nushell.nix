@@ -62,7 +62,7 @@
 
       programs.nushell = {
         enable = true;
-        configFile.file = ./config.nu;
+        configFile.source = ./config.nu;
         plugins = with pkgs.nushellPlugins; [
           polars
         ];

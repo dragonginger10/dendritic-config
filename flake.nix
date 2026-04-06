@@ -11,7 +11,7 @@
     };
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
