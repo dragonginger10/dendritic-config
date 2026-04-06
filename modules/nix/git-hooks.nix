@@ -6,7 +6,14 @@
   perSystem.pre-commit = {
     check.enable = true;
     settings = {
-      hooks.nixfmt.enable = true;
+      hooks = {
+        nixfmt.enable = true;
+        statix.enable = true;
+        nufmt = {
+          enable = true;
+          types = [ "file" ];
+        };
+      };
     };
   };
 }

@@ -17,6 +17,7 @@ in
           imports = with self.modules.nixos; [
             environment
             editors
+            home-manager
           ];
           preferences.shell.default = pkgs.zsh;
           programs.zsh.enable = true;

@@ -10,7 +10,7 @@ fmt:
 flake:
     nix run ".#write-flake"
 
-check: flake fmt
+check: fmt flake
     nix flake check
 
 up:
@@ -20,7 +20,7 @@ gc:
     sudo nh clean all > /dev/null 2>&1
 
 test target=host: check
-    nh os test -n .#{{target}}
+    nh os build -n .#{{target}}
     just gc
 
 switch target=host: check
