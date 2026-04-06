@@ -19,8 +19,6 @@ in
             editors
             home-manager
           ];
-          preferences.shell.default = pkgs.zsh;
-          programs.zsh.enable = true;
           editors.alternatives.enable = true;
         };
     }
@@ -30,6 +28,7 @@ in
         {
           imports = with self.modules.homeManager; [
             dragon-packages
+            shell
           ];
         };
     }
