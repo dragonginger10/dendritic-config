@@ -6,13 +6,15 @@
   nixosHosts.phos.enable = false;
 
   flake.modules.nixos."confs/phos" =
-    { config, ... }:
+    { config, lib, ... }:
     {
-      nixpkgs.hostPlatform = "x86_64-linux";
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       imports = with self.modules.nixos; [
         base
-        dragon
         nix
+        boot
+        gaming
+        dragon
       ];
 
       system.stateVersion = "25.11";

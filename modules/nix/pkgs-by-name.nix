@@ -15,9 +15,17 @@
   imports = [ inputs.pkgs-by-name.flakeModule ];
 
   perSystem =
-    { system, ... }:
+    { config, system, ... }:
     {
       pkgsDirectory = inputs.packages;
+      _module.args.pkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = [
+          (final: prev: {
+            local = config.packages;
+          })
+        ];
+      };
     };
 
   flake.overlays.default = _final: prev: {
