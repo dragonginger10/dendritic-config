@@ -3,7 +3,7 @@
   ...
 }:
 {
-  nixosHosts.phos.enable = false;
+  nixosHosts.phos.enable = true;
 
   flake.modules.nixos."confs/phos" =
     { config, lib, ... }:

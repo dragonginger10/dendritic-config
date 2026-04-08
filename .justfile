@@ -24,7 +24,6 @@ test target=host: check
     just gc
 
 switch target=host: check
-    exit 1
     nh os switch .#{{target}}
 
 back:

@@ -2,7 +2,7 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  xorg,
+  libx11,
   imlib2,
 }:
 let
@@ -21,7 +21,7 @@ stdenv.mkDerivation {
 
   buildInputs = [
     imlib2
-    xorg.libX11
+    libx11
   ];
 
   installPhase = ''
