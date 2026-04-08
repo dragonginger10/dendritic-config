@@ -8,6 +8,7 @@ let
   username = "dragon";
 in
 {
+  homeConfigs.${username}.enable = true;
   flake.modules = lib.mkMerge [
     (self.factory.user username true)
     {

@@ -31,10 +31,6 @@
 
         home-manager.users."${username}".imports = [
           self.modules.homeManager."${username}"
-          {
-            home.stateVersion = "25.05";
-            programs.home-manager.enable = true;
-          }
         ];
       };
 

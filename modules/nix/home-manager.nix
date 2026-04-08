@@ -27,7 +27,7 @@ in
 
   flake.modules.nixos.home-manager = {
     imports = [
-      inputs.home-manager.nixosModules.home-manager
+      inputs.home-manager.flakeModules.home-manager
       home-manager-config
     ];
   };
