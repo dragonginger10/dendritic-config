@@ -4,18 +4,27 @@
       config,
       lib,
       pkgs,
+      self',
       ...
     }:
+    let
+      alts = config.editors.alternatives.enable;
+    in
     {
       options.editors = {
         alternatives.enable = lib.mkEnableOption "Alternative editors";
       };
 
-      config = lib.mkIf config.editors.alternatives.enable {
-        environment.systemPackages = with pkgs; [
-          evil-helix
-          micro
-        ];
+      config = {
+        environment.systemPackages =
+          with pkgs;
+          [
+            self'.packages.neovim
+          ]
+          ++ lib.optional alts [
+            evil-helix
+            micro
+          ];
       };
     };
 }
