@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos."conf/phos" =
+  flake.modules.nixos."confs/phos" =
     {
       config,
       lib,
@@ -8,6 +8,28 @@
       ...
     }:
     {
+      fileSystems = {
+        "/" = {
+          device = "/dev/disk/by-label/ROOT";
+          fsType = "ext4";
+        };
+
+        "/boot/efi" = {
+          device = "/dev/disk/by-uuid/1DB1-8403";
+          fsType = "vfat";
+        };
+
+        "/home" = {
+          device = "/dev/disk/by-label/HOME";
+          fsType = "ext4";
+        };
+
+        "/games" = {
+          device = "/dev/disk/by-label/GAMES";
+          fsType = "ext4";
+        };
+      };
+
       imports = [
         (modulesPath + "/installer/scan/not-detected.nix")
       ];
@@ -49,28 +71,6 @@
           "hid-tmff2"
           "kvm-amd"
         ];
-      };
-
-      fileSystems = {
-        "/" = {
-          device = "/dev/disk/by-label/ROOT";
-          fsType = "ext4";
-        };
-
-        "/boot/efi" = {
-          device = "/dev/disk/by-uuid/1DB1-8403";
-          fsType = "vfat";
-        };
-
-        "/home" = {
-          device = "/dev/disk/by-label/HOME";
-          fsType = "ext4";
-        };
-
-        "/games" = {
-          device = "/dev/disk/by-label/GAMES";
-          fsType = "ext4";
-        };
       };
 
       swapDevices = [ ];

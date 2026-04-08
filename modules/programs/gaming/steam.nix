@@ -8,12 +8,12 @@
 
   flake.modules.nixos.steam = {
     hardware.graphics.enable = true;
-    hardware.graphics.enable32bit = true;
+    hardware.graphics.enable32Bit = true;
     programs = {
       gamemode.enable = true;
       steam = {
         enable = true;
-        remotePlat.openFirewall = true;
+        remotePlay.openFirewall = true;
       };
     };
   };

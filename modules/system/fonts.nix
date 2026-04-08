@@ -1,8 +1,8 @@
 {
   flake.modules.nixos.fonts =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
-      config.fonts.packages = with pkgs; [
+      fonts.packages = with pkgs; [
         nerd-fonts.fira-code
         nerd-fonts.fira-mono
         fira-code
