@@ -1,6 +1,7 @@
 set quiet := true
 alias s := switch
 host := `hostname`
+user := `whoami`
 
 default: check
 
@@ -28,3 +29,6 @@ switch target=host: check
 
 back:
     nh os rollback
+
+home:
+    nh home switch -c {{user}} --offline .
