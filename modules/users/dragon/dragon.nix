@@ -33,6 +33,7 @@ in
             dragon-packages
             shell
           ];
+          home.stateVersion = "25.11";
         };
     }
   ];

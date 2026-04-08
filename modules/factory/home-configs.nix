@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -31,15 +30,13 @@ in
         user: options:
         if options.enable then
           (inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
+            pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             modules = [
-              (config.flake.modules.homeModules."${user}" or { })
+              (config.flake.modules.homeManager.${user} or { })
               {
                 home = {
                   username = user;
                   homeDirectory = "/home/${user}";
-                  stateVersion = "25.11";
-
                 };
               }
             ]
