@@ -3,14 +3,14 @@
 
   flake-file.inputs.nixvim = {
     url = lib.mkDefault "github:nix-community/nixvim";
-    nixpkgs.follows = "nixpkgs";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  perSystem.packages.neovim =
-    { pkgs, ... }:
+  perSystem =
+    { pkgs, system, ... }:
     let
-      nixvim' = inputs.nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-      nvim = nixvim'.makeNixvim {
+      nixvim' = inputs.nixvim.legacyPackages.${system};
+      neovim = nixvim'.makeNixvim {
         globals.mapleader = " ";
         viAlias = true;
         opts = {
@@ -31,7 +31,7 @@
         plugins = {
           bufferline.enable = true;
           direnv.enable = true;
-          drpbar.enable = true;
+          dropbar.enable = true;
           hop.enable = true;
           harpoon.enable = true;
           intellitab.enable = true;
@@ -41,11 +41,10 @@
           noice.enable = true;
           none-ls.enable = true;
           nvim-autopairs.enable = true;
-          webdevicons.enable = true;
+          web-devicons.enable = true;
           yazi.enable = true;
           startify.enable = true;
         };
-        keymaps = { };
         lsp.servers = {
           nushell.enable = true;
           just.enable = true;
@@ -64,8 +63,10 @@
       };
     in
     {
-      inherit nvim;
-      default = nvim;
+      packages = {
+        inherit neovim;
+        default = neovim;
+      };
     };
 
 }
