@@ -1,5 +1,5 @@
 {
-  flake.module.nixvim.base = {
+  flake.modules.nixvim.base = {
     globals.mapleader = " ";
     viAlias = true;
     opts = {

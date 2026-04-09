@@ -20,7 +20,6 @@ in
             editors
             home-manager
           ];
-          editors.alternatives.enable = true;
         };
     }
     {
