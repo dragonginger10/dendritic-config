@@ -1,4 +1,4 @@
-{ lib, inputs, ... }:
+{ lib, ... }:
 {
 
   flake-file.inputs.nixvim = {
@@ -8,13 +8,11 @@
 
   perSystem =
     {
-      config,
-      pkgs,
-      system,
+      inputs',
       ...
     }:
     let
-      nixvim = inputs.nixvim.legacyPackages.${system};
+      nixvim = inputs'.nixvim.legacyPackages;
       neovim = nixvim.makeNixvim {
         globals.mapleader = " ";
         viAlias = true;

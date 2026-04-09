@@ -1,10 +1,9 @@
-{ inputs, ... }:
 {
   # imports = [];
   perSystem =
     {
+      inputs',
       pkgs,
-      system,
       config,
       ...
     }:
@@ -12,7 +11,7 @@
       devShells.default = pkgs.mkShell {
         NIX_CONFIG = "experimental-features = nix-command flakes pipe-operators";
         packages = with pkgs; [
-          inputs.ragenix.packages.${system}.ragenix
+          inputs'.ragenix.packages.ragenix
           nh
           just
           nixd
