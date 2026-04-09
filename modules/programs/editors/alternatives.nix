@@ -9,6 +9,8 @@
     }:
     let
       alts = config.editors.alternatives.enable;
+      nvim = self'.packages.neovim;
+      themed-nvim = nvim.extend config.stylix.targets.nixvim.exportModule;
     in
     {
       options.editors = {
@@ -19,7 +21,7 @@
         environment.systemPackages =
           with pkgs;
           [
-            self'.packages.neovim
+            themed-nvim
           ]
           ++ lib.optional alts [
             evil-helix

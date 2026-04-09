@@ -7,22 +7,27 @@
   };
 
   perSystem =
-    { pkgs, system, ... }:
+    {
+      config,
+      pkgs,
+      system,
+      ...
+    }:
     let
-      nixvim' = inputs.nixvim.legacyPackages.${system};
-      neovim = nixvim'.makeNixvim {
+      nixvim = inputs.nixvim.legacyPackages.${system};
+      neovim = nixvim.makeNixvim {
         globals.mapleader = " ";
         viAlias = true;
         opts = {
           relativenumber = true;
           tabstop = 4;
-          softabstop = 4;
+          softtabstop = 4;
           shiftwidth = 4;
           expandtab = true;
           smartindent = true;
           hlsearch = false;
           incsearch = true;
-          terguicolors = true;
+          termguicolors = true;
           scrolloff = 8;
           updatetime = 50;
           conceallevel = 2;
@@ -65,7 +70,6 @@
     {
       packages = {
         inherit neovim;
-        default = neovim;
       };
     };
 
