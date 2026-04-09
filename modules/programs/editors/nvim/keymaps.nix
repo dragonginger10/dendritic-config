@@ -16,5 +16,11 @@
       action = "<cmd>LazyGit<CR>";
       options.silent = true;
     }
+    {
+      mode = "n";
+      key = "<leader>w";
+      action = "<cmd>HopWord<CR>";
+      options.silent = true;
+    }
   ];
 }
