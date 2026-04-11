@@ -3,7 +3,7 @@
   flake-file.inputs = {
     ragenix.url = lib.mkDefault "github:yaxitech/ragenix";
     secrets = {
-      url = "path:./secrets";
+      url = "path:../../secrets/";
       flake = false;
     };
   };
@@ -13,7 +13,9 @@
     {
       imports = [ inputs.ragenix.nixosModules.default ];
 
-      age.secrets.sneaky.file = inputs.secrets + /sneaky.age;
-      age.identityPaths = [ "/home/dragon/.ssh/id_ed25519" ];
+      config = {
+        age.secrets.sneaky.file = inputs.secrets + /sneaky.age;
+        age.identityPath = ["/home/dragon/.ssh/id_ed25519"];
+      };
     };
 }
