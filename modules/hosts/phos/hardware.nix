@@ -47,13 +47,8 @@
         kernelParams = [ "amd_iommu=on" ];
         plymouth = {
           enable = true;
-          themePackages = [
-            pkgs.local.dracula-plymouth
-          ];
-          theme = lib.mkForce "dracula";
         };
         loader.grub = {
-          gfxmodeEfi = "3440x1440";
           extraEntries = ''
             menuentry "Batocera" {
                 search --set=root --label BATOCERA
