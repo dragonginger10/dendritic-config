@@ -4,6 +4,13 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -28,9 +35,8 @@
       flake = false;
     };
     pkgs-by-name.url = "github:drupol/pkgs-by-name-for-flake-parts";
-    ragenix.url = "github:yaxitech/ragenix";
     secrets = {
-      url = "path:./secrets";
+      url = "path:secrets";
       flake = false;
     };
     stylix.url = "github:nix-community/stylix";

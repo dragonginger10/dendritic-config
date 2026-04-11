@@ -11,7 +11,7 @@
       devShells.default = pkgs.mkShell {
         NIX_CONFIG = "experimental-features = nix-command flakes pipe-operators";
         packages = with pkgs; [
-          inputs'.ragenix.packages.ragenix
+          inputs'.agenix.packages.default
           nh
           just
           nixd

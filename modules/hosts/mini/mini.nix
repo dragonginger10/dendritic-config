@@ -4,23 +4,19 @@
   flake.modules.nixos."confs/mini" =
     {
       config,
-    lib,
+      lib,
       ...
     }:
     {
       imports = with self.modules.nixos; [
         nix
+        boot
         base
         dragon
       ];
 
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       system.stateVersion = "25.11";
-
-      boot.loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-      };
 
       virtualisation.vmVariant.virtualisation = {
         memorySize = 4096;
