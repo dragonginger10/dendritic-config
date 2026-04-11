@@ -1,16 +1,41 @@
-{ pkgs, lib, ... }:
 {
-  flake.factory.mkWhichKey =
-    menu:
+  inputs,
+  self,
+  lib,
+  ...
+}:
+let
+  inherit (inputs.wrappers.lib) wrapModule;
+  mkWhichKey =
+    pkgs: menu:
+    self.wrapModules.which-key.wrap {
+      inherit pkgs;
+      settings = {
+        inherit menu;
+        anchor = "bottom-right";
+      };
+    };
+in
+{
+  flake.factory.mkWhichKeyExe = pkgs: menu: lib.getExe (mkWhichKey pkgs menu);
+
+  flake.wrapModules.which-key = wrapModule (
+    {config, lib, pkgs, ...}:
     let
-      configFile = pkgs.writeText "config.yaml" (
-        lib.generators.toYAML { } {
-          anchor = "bottom right";
-          inherit menu;
-        }
-      );
+      yamlFormat = pkgs.formats.yaml { };
     in
-    pkgs.writeShellScriptBin "keyMenu" ''
-      exec ${lib.getExe pkgs.wlr-which-key} ${configFile}
-    '';
+    {
+      options.settings = lib.mkOption {
+        type = yamlFormat.type;
+        description = "The keymap";
+      };
+
+      config = {
+        package = config.pkgs.wlr-which-key;
+        addFlag = [
+          (toString (yamlFormat.generate "config.yaml" config.settings))
+        ];
+      };
+    }
+  );
 }
