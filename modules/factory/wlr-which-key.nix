@@ -20,13 +20,18 @@ in
   flake.factory.mkWhichKeyExe = pkgs: menu: lib.getExe (mkWhichKey pkgs menu);
 
   flake.wrapModules.which-key = wrapModule (
-    {config, lib, pkgs, ...}:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       yamlFormat = pkgs.formats.yaml { };
     in
     {
       options.settings = lib.mkOption {
-        type = yamlFormat.type;
+        inherit (yamlFormat) type;
         description = "The keymap";
       };
 

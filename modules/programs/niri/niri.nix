@@ -45,21 +45,22 @@
           binds = {
             "Mod+Return".spawn = getExe pref.terminal;
 
-            "Mod+d".spawn-sh = let 
-              menu = [
-              {
-                key = "d";
-                desc = "discord";
-                cmd = "${getExe pkgs.webcord}";
-              }
-              {
-                key = "p";
-                desc = "pulsemixer";
-                cmd = "${getExe pkgs.ghostty} -e ${getExe pkgs.pulsemixer}";
-              }
-            ];
-  in
-      self.factory.mkWhichKeyExe config.pkgs menu;
+            "Mod+d".spawn-sh =
+              let
+                menu = [
+                  {
+                    key = "d";
+                    desc = "discord";
+                    cmd = "${getExe pkgs.webcord}";
+                  }
+                  {
+                    key = "p";
+                    desc = "pulsemixer";
+                    cmd = "${getExe pkgs.ghostty} -e ${getExe pkgs.pulsemixer}";
+                  }
+                ];
+              in
+              self.factory.mkWhichKeyExe config.pkgs menu;
           };
         };
     };
