@@ -4,9 +4,10 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  perSystem = {pkgs, inputs', ...}: {
-    package = {
-      zen-browser = inputs'.zen.packages.default;
+  perSystem =
+    { inputs', ... }:
+    {
+      packages.zen-browser = inputs'.zen.packages.default;
     };
-  };
+
 }
