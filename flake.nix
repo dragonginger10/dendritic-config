@@ -16,6 +16,7 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     };
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
     home-manager = {
       url = "github:nix-community/home-manager";

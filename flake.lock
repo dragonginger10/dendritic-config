@@ -240,6 +240,21 @@
         "type": "github"
       }
     },
+    "flake-schemas": {
+      "locked": {
+        "lastModified": 1776384880,
+        "narHash": "sha256-28Cg9HI/IwFHUm5fZyMEGCQ94L3Il6K4OfHeRf0b+Zw=",
+        "owner": "DeterminateSystems",
+        "repo": "flake-schemas",
+        "rev": "b852751d29c6e09919f25c1e10754646bdc181c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DeterminateSystems",
+        "repo": "flake-schemas",
+        "type": "github"
+      }
+    },
     "fromYaml": {
       "flake": false,
       "locked": {
@@ -540,6 +555,7 @@
         "agenix": "agenix",
         "flake-file": "flake-file",
         "flake-parts": "flake-parts",
+        "flake-schemas": "flake-schemas",
         "git-hooks-nix": "git-hooks-nix",
         "home-manager": "home-manager",
         "import-tree": "import-tree",
