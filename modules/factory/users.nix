@@ -26,7 +26,6 @@
           ]
           ++ lib.optionals isAdmin [
             "wheel"
-            "docker"
           ];
         };
 

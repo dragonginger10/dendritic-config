@@ -15,8 +15,11 @@
         boot
         gaming
         dragon
+        displayManager
+        desktop
       ];
 
       system.stateVersion = "25.11";
+
     };
 }
