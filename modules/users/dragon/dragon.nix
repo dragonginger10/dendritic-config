@@ -10,7 +10,7 @@ in
 {
   homeConfigs.${username}.enable = true;
   flake.modules = lib.mkMerge [
-    (self.factory.user username true)
+    (self.lib.user username true)
     {
       nixos.${username} =
         { pkgs, ... }:

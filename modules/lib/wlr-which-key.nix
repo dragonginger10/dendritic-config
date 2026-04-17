@@ -17,7 +17,7 @@ let
     };
 in
 {
-  flake.factory.mkWhichKeyExe = pkgs: menu: lib.getExe (mkWhichKey pkgs menu);
+  flake.lib.mkWhichKeyExe = pkgs: menu: lib.getExe (mkWhichKey pkgs menu);
 
   flake.wrapModules.which-key = wrapModule (
     {

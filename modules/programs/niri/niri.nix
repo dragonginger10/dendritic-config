@@ -60,7 +60,7 @@
                   }
                 ];
               in
-              self.factory.mkWhichKeyExe config.pkgs menu;
+              self.lib.mkWhichKeyExe config.pkgs menu;
           };
         };
     };

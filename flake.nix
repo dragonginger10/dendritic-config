@@ -4,13 +4,6 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs = {
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     determinate = {
       url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,10 +33,6 @@
       flake = false;
     };
     pkgs-by-name.url = "github:drupol/pkgs-by-name-for-flake-parts";
-    secrets = {
-      url = "path:secrets";
-      flake = false;
-    };
     stylix.url = "github:nix-community/stylix";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     wrappers = {
