@@ -9,7 +9,7 @@
         ...
       }:
       {
-        imports = [ 
+        imports = [
           self.modules.generic.constants
           self.modules.nixos.secrets
         ];
