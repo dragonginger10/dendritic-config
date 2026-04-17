@@ -1,18 +1,18 @@
 {
-  flake.module.nixos.tmux =
+  flake.modules.nixos.tmux =
     { pkgs, ... }:
     {
       config = {
-        progams.tmux = {
+        programs.tmux = {
           enable = true;
-          keymode = "vi";
+          keyMode = "vi";
           shortcut = "C-Space";
           baseIndex = 1;
           escapeTime = 10;
           terminal = "tmux-256color";
           plugins = with pkgs.tmuxPlugins; [
             sensible
-
+            battery
           ];
           extraConfig = ''
             set-option -sa terminal-overrides ",xterm*:Tc"

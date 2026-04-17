@@ -19,6 +19,7 @@ in
             environment
             editors
             home-manager
+            tmux
           ];
         };
     }
