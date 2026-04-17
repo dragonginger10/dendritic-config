@@ -17,6 +17,7 @@
 
         base
         nix
+        determinate
         dragon
       ];
 

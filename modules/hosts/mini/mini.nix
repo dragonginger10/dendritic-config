@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  nixosHosts.mini.enable = true;
+  nixosHosts.mini.enable = false;
   flake.modules.nixos."confs/mini" =
     {
       config,
