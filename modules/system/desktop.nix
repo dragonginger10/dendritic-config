@@ -4,7 +4,7 @@
     nixos.desktop =
       { pkgs, config, ... }:
       let
-        selfpkgs = self.package.${pkgs.stdenv.hostPlatform.system};
+        selfpkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
       in
       {
         programs.niri.enable = true;
