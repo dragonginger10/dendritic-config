@@ -9,7 +9,7 @@
     }:
     let
       alts = config.editors.alternatives.enable;
-      nvim = self.packages.${pkgs.system}.neovim;
+      nvim = self.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
       themed-nvim = nvim.extend config.stylix.targets.nixvim.exportedModule;
     in
     {

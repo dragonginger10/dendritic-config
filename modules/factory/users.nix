@@ -11,24 +11,14 @@
       {
         imports = [
           self.modules.generic.constants
-          self.modules.nixos.secrets
         ];
 
         preferences.user.name = "${username}";
-        users.mutableUsers = false;
-
-        age.secrets.${username} = {
-          file = "${self.inputs.secrets}/${username}.age";
-          path = "/home/dragon/dragon.txt";
-        };
-        age.identityPaths = [
-          "/home/dragon/.ssh/id_ed25519"
-        ];
+        # users.mutableUsers = false;
 
         users.users.${username} = {
           isNormalUser = true;
-          password = "password";
-          # hashedPasswordFile = "${config.age.secrets.${username}.path}";
+          initialPassword = "password";
           home = "/home/${username}";
           extraGroups = [
             "storage"

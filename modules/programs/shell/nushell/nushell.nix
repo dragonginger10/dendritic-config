@@ -53,7 +53,7 @@
         carapace.enable = true;
         starship =
           let
-            tomlPath = self.packages.${pkgs.system}.eldritch-starship;
+            tomlPath = self.packages.${pkgs.stdenv.hostPlatform.system}.eldritch-starship;
           in
           {
             enable = true;
