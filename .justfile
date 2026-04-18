@@ -32,3 +32,7 @@ back:
 
 home:
     nh home switch -c {{user}} --offline .
+
+vm target=host:
+    nh os build-vm .#{{target}}
+    ./result/bin/run-{{target}}-vm

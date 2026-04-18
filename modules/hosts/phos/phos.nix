@@ -17,6 +17,7 @@
         dragon
         displayManager
         desktop
+        vm
       ];
 
       system.stateVersion = "25.11";

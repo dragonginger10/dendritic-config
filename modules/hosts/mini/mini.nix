@@ -13,6 +13,7 @@
         boot
         base
         dragon
+        vm
       ];
 
       config = {
@@ -22,13 +23,6 @@
           "/".device = "/dev/vda1";
         };
 
-        virtualisation.vmVariant = {
-          useDefaultFilesystems = false;
-          virtualisation = {
-            memorySize = 4096;
-            cores = 4;
-          };
-        };
 
         services.xserver = {
           enable = true;
