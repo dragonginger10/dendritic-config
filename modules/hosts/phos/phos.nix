@@ -15,6 +15,7 @@
         boot
         gaming
         dragon
+        determinate
         displayManager
         desktop
         vm

@@ -19,7 +19,6 @@ in
             environment
             editors
             home-manager
-            tmux
           ];
         };
     }
@@ -31,7 +30,9 @@ in
           gtk.gtk4.theme = null;
           imports = with self.modules.homeManager; [
             dragon-packages
+            nix
             shell
+            gui
           ];
           home.stateVersion = "25.11";
         };

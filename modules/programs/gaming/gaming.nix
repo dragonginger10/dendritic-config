@@ -1,5 +1,9 @@
 { self, ... }:
 {
+  nixpkgs.allowedUnfreePackages = [
+    "clonehero"
+  ];
+
   flake.modules.nixos.gaming =
     { pkgs, ... }:
     {

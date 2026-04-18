@@ -19,7 +19,6 @@
     web-devicons.enable = true;
     which-key.enable = true;
     yazi.enable = true;
-    blink-indent.enable = true;
     blink-cmp-spell.enable = true;
     ccc.enable = true;
   };

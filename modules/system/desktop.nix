@@ -10,6 +10,7 @@
         environment.systemPackages = with pkgs; [
           selfpkgs.zen-browser
           gpu-screen-recorder-gtk
+          noctalia-shell
         ];
 
         programs = {
@@ -30,7 +31,7 @@
           };
 
           udev.packages = [
-            pkgs.via
+            pkgs.vial
           ];
         };
       };
