@@ -7,16 +7,31 @@
         selfpkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
       in
       {
-        environment.systemPackages = [
+        environment.systemPackages = with pkgs; [
           selfpkgs.zen-browser
+          gpu-screen-recorder-gtk
         ];
 
-        programs.niri.enable = true;
-        programs.niri.package = selfpkgs.niri;
+        programs = {
+          gpu-screen-recorder.enable = true;
 
-        services.xserver = {
-          enable = true;
-          desktopManager.lxqt.enable = true;
+          niri = {
+            enable = true;
+            package = selfpkgs.niri;
+          };
+
+        };
+
+        services = {
+          flatpak.enable = true;
+          xserver = {
+            enable = true;
+            desktopManager.lxqt.enable = true;
+          };
+
+          udev.packages = [
+            pkgs.via
+          ];
         };
       };
   };

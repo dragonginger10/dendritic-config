@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.tmux =
+  flake.modules.homeManager.tmux =
     { pkgs, ... }:
     {
       config = {

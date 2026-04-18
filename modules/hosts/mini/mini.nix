@@ -23,7 +23,6 @@
           "/".device = "/dev/vda1";
         };
 
-
         services.xserver = {
           enable = true;
           desktopManager.lxqt.enable = true;

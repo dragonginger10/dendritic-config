@@ -20,6 +20,8 @@
         vm
       ];
 
+      security.sudo.wheelNeedsPassword = false;
+
       system.stateVersion = "25.11";
 
     };

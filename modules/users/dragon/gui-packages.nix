@@ -1,5 +1,15 @@
 {
-  flake.modules.homeManager.gui = {
+  flake.modules.homeManager.gui = {pkgs, ...}:{
+    home.packages = with pkgs; [
+      mattermost-desktop
+      feh
+      nautilus
+      discover-overlay
+      mpv
+      calibre
+      noctalia-shell
+    ];
+
     programs = {
       discord.enable = true;
       ghostty = {
