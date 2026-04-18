@@ -11,6 +11,11 @@
           default = "dragon";
         };
 
+        theme = mkOption {
+          type = types.str;
+          default = "eldritch";
+        };
+
         autostart = mkOption {
           type = types.listOf (types.either types.str types.package);
           default = [ ];

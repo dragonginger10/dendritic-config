@@ -58,7 +58,7 @@
             ];
             spawn-at-startup = with pkgs; [
               "noctalia-shell"
-              (getExe xwayland-satellite)
+              "xwayland-satellite"
             ];
             input.keyboard = {
               xkb = {

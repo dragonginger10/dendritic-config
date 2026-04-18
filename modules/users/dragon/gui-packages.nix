@@ -1,6 +1,6 @@
 {
   nixpkgs.allowedUnfreePackages = [
-    "discord-canary"
+    "discord"
   ];
 
   flake.modules.homeManager.gui =
@@ -18,7 +18,6 @@
 
       programs = {
         discord.enable = true;
-        discord.package = pkgs.discord-canary;
         ghostty = {
           enable = true;
           settings = {

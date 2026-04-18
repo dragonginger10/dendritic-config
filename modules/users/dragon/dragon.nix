@@ -1,5 +1,4 @@
 {
-  inputs,
   self,
   lib,
   ...
@@ -12,30 +11,26 @@ in
   flake.modules = lib.mkMerge [
     (self.lib.user username true)
     {
-      nixos.${username} =
-        { pkgs, ... }:
-        {
-          imports = with self.modules.nixos; [
-            environment
-            editors
-            home-manager
-          ];
-        };
+      nixos.${username} = {
+        imports = with self.modules.nixos; [
+          environment
+          editors
+          home-manager
+        ];
+      };
     }
     {
-      homeManager.${username} =
-        { pkgs, ... }:
-        {
-          #set to new behaviour for gtk
-          gtk.gtk4.theme = null;
-          imports = with self.modules.homeManager; [
-            dragon-packages
-            nix
-            shell
-            gui
-          ];
-          home.stateVersion = "25.11";
-        };
+      homeManager.${username} = {
+        #set to new behaviour for gtk
+        gtk.gtk4.theme = null;
+        imports = with self.modules.homeManager; [
+          dragon-packages
+          nix
+          stylix
+          shell
+        ];
+        home.stateVersion = "25.11";
+      };
     }
   ];
 }
