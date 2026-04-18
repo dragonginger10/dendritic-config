@@ -217,11 +217,11 @@
                   in
                   mkMenu menu;
 
-                "XF86AudioNext".spawn = "${getExe pkgs.playerctl} next";
-                "XF86AudioPlay".spawn = "${getExe pkgs.playerctl} play-pause";
-                "XF86AudioPrev".spawn = "${getExe pkgs.playerctl} previous";
-                "XF86AudioLowerVolume".spawn = "${getExe pkgs.ponymix} decrease 1";
-                "XF86AudioRaiseVolume".spawn = "${getExe pkgs.ponymix} increase 1";
+                "XF86AudioNext".spawn-sh = "${getExe pkgs.playerctl} next";
+                "XF86AudioPlay".spawn-sh = "${getExe pkgs.playerctl} play-pause";
+                "XF86AudioPrev".spawn-sh = "${getExe pkgs.playerctl} previous";
+                "XF86AudioLowerVolume".spawn-sh = "${getExe pkgs.ponymix} decrease 1";
+                "XF86AudioRaiseVolume".spawn-sh = "${getExe pkgs.ponymix} increase 1";
                 "Mod+Shift+S".screenshot = _: { };
                 "Print".screenshot-screen = _: { };
                 "Mod+C".center-column = _: { };
