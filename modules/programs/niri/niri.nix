@@ -139,6 +139,11 @@
                         desc = "mattermost";
                         cmd = "${getExe pkgs.mattermost-desktop}";
                       }
+                      {
+                        key = "y";
+                        desc = "Youtube";
+                        cmd = "flatpak run rocks.shy.VacuumTube";
+                      }
                     ];
                   in
                   mkMenu menu;
@@ -162,6 +167,26 @@
                       }
                     ];
                   in
+                  mkMenu menu;
+                "Mod+S".spawn-sh = let
+                  menu = [
+                    {
+                      key = "r";
+                      desc = "toggle recording";
+                      cmd = "noctalia-shell ipc call plugin:screen-recorder toggle";
+                    }
+                    {
+                      key = "a";
+                      desc = "toggle replay";
+                      cmd = "noctalia-shell ipc call plugin:screen-recorder toggleReplay";
+                    }
+                    {
+                      key = "s";
+                      desc = "save replay";
+                      cmd = "noctalia-shell ipc call plugin:screen-recorder saveReplay";
+                    }
+                  ];
+                in
                   mkMenu menu;
 
                 "XF86AudioNext".spawn = "${getExe pkgs.playerctl} next";
