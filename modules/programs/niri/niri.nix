@@ -43,9 +43,33 @@
 
             window-rules = [
               {
+                matches = [
+                  {
+                    is-active = false;
+                    is-floating = true;
+                  }
+                ];
+                opacity = 0.5;
+              }
+              {
+                matches = [
+                  {
+                    app-id = "steam";
+                    title = "^notificationtoats_\d+_desktop%";
+                  }
+                ];
+                default-floating-position = _: {
+                  props = {
+                    x = 10;
+                    y = 10;
+                    relative-to = "bottom-right";
+                  };
+                };
+              }
+              {
                 matches = [ { is-window-cast-target = true; } ];
                 focus-ring = {
-                  active-color = "#ffb86c";
+                  active-color = "#f38ba8";
                   inactive-color = "#7a5935";
                 };
                 border.inactive-color = "#7d0d2d";
@@ -102,6 +126,9 @@
                 "Mod+Shift+Space".switch-focus-between-floating-and-tiling = _: { };
                 "Mod+Space".toggle-window-floating = _: { };
                 "Mod+Shift+P".power-off-monitors = _: { };
+                "Mod+Shift+R".set-dynamic-cast-window = _: { };
+                "Mod+Ctrl+R".set-dynamic-cast-monitor = _: { };
+                "Mod+Alt+R".clear-dynamic-cast-target = _: { };
 
                 "Mod+Ctrl+L" = {
                   spawn = noctalia "lockScreen lock";
@@ -168,25 +195,26 @@
                     ];
                   in
                   mkMenu menu;
-                "Mod+S".spawn-sh = let
-                  menu = [
-                    {
-                      key = "r";
-                      desc = "toggle recording";
-                      cmd = "noctalia-shell ipc call plugin:screen-recorder toggle";
-                    }
-                    {
-                      key = "a";
-                      desc = "toggle replay";
-                      cmd = "noctalia-shell ipc call plugin:screen-recorder toggleReplay";
-                    }
-                    {
-                      key = "s";
-                      desc = "save replay";
-                      cmd = "noctalia-shell ipc call plugin:screen-recorder saveReplay";
-                    }
-                  ];
-                in
+                "Mod+S".spawn-sh =
+                  let
+                    menu = [
+                      {
+                        key = "r";
+                        desc = "toggle recording";
+                        cmd = "noctalia-shell ipc call plugin:screen-recorder toggle";
+                      }
+                      {
+                        key = "a";
+                        desc = "toggle replay";
+                        cmd = "noctalia-shell ipc call plugin:screen-recorder toggleReplay";
+                      }
+                      {
+                        key = "s";
+                        desc = "save replay";
+                        cmd = "noctalia-shell ipc call plugin:screen-recorder saveReplay";
+                      }
+                    ];
+                  in
                   mkMenu menu;
 
                 "XF86AudioNext".spawn = "${getExe pkgs.playerctl} next";
