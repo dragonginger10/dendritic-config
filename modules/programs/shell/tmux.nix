@@ -9,7 +9,7 @@
         baseIndex = 1;
         escapeTime = 10;
         terminal = "tmux-256color";
-        shell = "nu";
+        shell = "${pkgs.nushell}/bin/nu";
         plugins = with pkgs.tmuxPlugins; [
           sensible
           battery
