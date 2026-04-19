@@ -17,15 +17,19 @@
       ];
 
       boot = {
-        initrd.availableKernelModules = [
-          "nvme"
-          "xhci_pci"
-          "ahci"
-          "usb_storage"
-          "sd_mod"
-          "rtsx_pci_sdmmc"
-        ];
-        initrd.kernelModules = [ ];
+        initrd = {
+          luks.devices."luks-7061dd1d-573e-41cb-949b-fea6ab474653".device =
+            "/dev/disk/by-uuid/7061dd1d-573e-41cb-949b-fea6ab474653";
+          availableKernelModules = [
+            "nvme"
+            "xhci_pci"
+            "ahci"
+            "usb_storage"
+            "sd_mod"
+            "rtsx_pci_sdmmc"
+          ];
+          kernelModules = [ ];
+        };
         kernelModules = [ "kvm-amd" ];
         extraModulePackages = [ ];
       };
@@ -34,9 +38,6 @@
         device = "/dev/mapper/luks-7061dd1d-573e-41cb-949b-fea6ab474653";
         fsType = "ext4";
       };
-
-      boot.initrd.luks.devices."luks-7061dd1d-573e-41cb-949b-fea6ab474653".device =
-        "/dev/disk/by-uuid/7061dd1d-573e-41cb-949b-fea6ab474653";
 
       fileSystems."/boot" = {
         device = "/dev/disk/by-uuid/3263-D2BC";
