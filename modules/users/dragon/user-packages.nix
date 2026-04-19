@@ -1,8 +1,13 @@
 {
   flake.modules.homeManager.dragon-packages =
-    { lib, pkgs, ... }:
+    { pkgs, ... }:
     {
-      # home.packages = with pkgs; [];
+      home.packages = with pkgs; [
+        russ
+        epy
+        glow
+        sc-im
+      ];
       programs = {
         bat.enable = true;
         lazygit.enable = true;

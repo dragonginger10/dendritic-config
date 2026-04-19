@@ -6,7 +6,7 @@
   nixosHosts.phos.enable = true;
 
   flake.modules.nixos."confs/phos" =
-    { config, lib, ... }:
+    { pkgs, lib, ... }:
     {
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       imports = with self.modules.nixos; [
@@ -19,6 +19,16 @@
         displayManager
         desktop
         vm
+      ];
+
+      environment.systemPackages = with pkgs; [
+        ani-cli
+        deluge
+        openhue-cli
+        opencode
+        wtwitch
+        twitch-tui
+        nyaa
       ];
 
       security.sudo.wheelNeedsPassword = false;
