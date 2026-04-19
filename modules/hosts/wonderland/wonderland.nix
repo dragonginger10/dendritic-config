@@ -12,11 +12,12 @@
       imports = with self.modules.nixos; [
         base
         nix
-        boot
         dragon
         desktop
         determinate
       ];
+
+      boot.loader.systemd-boot.enable = true;
 
       services = {
         displayManager = {

@@ -25,7 +25,6 @@ in
         gtk.gtk4.theme = null;
         imports = with self.modules.homeManager; [
           dragon-packages
-          nix
           stylix
           shell
         ];

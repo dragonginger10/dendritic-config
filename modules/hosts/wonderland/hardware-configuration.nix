@@ -51,6 +51,15 @@
         { device = "/dev/mapper/luks-343f1b27-ab09-43c7-a851-6623137a8151"; }
       ];
 
-      hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+      hardware = {
+        cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+        bluetooth = {
+          enable = true;
+          powerOnBoot = true;
+          settings.General = {
+            Enable = "Source,Sink,Media,Socket";
+          };
+        };
+      };
     };
 }

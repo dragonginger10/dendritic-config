@@ -33,6 +33,7 @@ in
             pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             modules = [
               inputs.stylix.homeModules.stylix
+              config.flake.modules.homeManager.nix
               (config.flake.modules.homeManager.${user} or { })
               {
                 home = {
