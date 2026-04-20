@@ -18,14 +18,23 @@ up:
     nix flake update
 
 gc:
+    echo "Cleaning ..."
     sudo nh clean all > /dev/null 2>&1
 
-test target=host: check
-    nh os build -n .#{{target}}
+test target=host: 
+    nh os build -t -n .#{{target}}
     just gc
 
-switch target=host: check
-    nh os switch .#{{target}}
+switch target=host: 
+    #!/usr/bin/env bash
+    echo "Formatting & Checking..."
+    just check > /dev/null 2>&1 
+    if [ $? -ne 0 ]; then
+        echo "Check has failed"
+        exit 1
+    fi
+    echo "Nixos is building..."
+    nh os switch .#{{target}} > /dev/null 2>&1
 
 back:
     nh os rollback
