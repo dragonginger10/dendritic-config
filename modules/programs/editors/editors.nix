@@ -8,12 +8,12 @@
       ...
     }:
     let
-      alts = config.editors.alternatives.enable;
+      alts = config.preferences.editors.alternatives.enable;
       nvim = self.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
       themed-nvim = nvim.extend config.stylix.targets.nixvim.exportedModule;
     in
     {
-      options.editors = {
+      options.preferences.editors = {
         alternatives.enable = lib.mkEnableOption "Alternative editors";
       };
 

@@ -2,6 +2,7 @@
   flake.modules.nixvim.base.lsp.servers = {
     nushell.enable = true;
     just.enable = true;
+    bashls.enable = true;
 
     nixd = {
       enable = true;
