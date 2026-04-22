@@ -9,8 +9,8 @@
     }:
     let
       alts = config.preferences.editors.alternatives.enable;
-      nvim = self.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
-      themed-nvim = nvim.extend config.stylix.targets.nixvim.exportedModule;
+      selfpkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
+      themed-nvim = selfpkgs.nvim.extend config.stylix.targets.nixvim.exportedModule;
     in
     {
       options.preferences.editors = {
@@ -25,7 +25,7 @@
           ]
           ++ lib.optionals alts [
             evil-helix
-            micro
+            selfpkgs.micro
           ];
       };
     };
