@@ -3,20 +3,21 @@ let
   inherit (inputs.wrappers.lib) wrapModule;
 in
 {
-  flake.wrapModule.micro = wrapModule (
-    { pkgs, ... }:
-    {
-      config.package = pkgs.micro;
-      config.env = {
-        MICRO_CONFIG_HOME = "$HOME/.config/micro";
-      };
-    }
-  );
-
   perSystem =
     { pkgs, ... }:
+    let
+      micro = wrapModule (
+        { pkgs, ... }:
+        {
+          config.package = pkgs.micro;
+          config.env = {
+            MICRO_CONFIG_HOME = "$HOME/.config/micro";
+          };
+        }
+      );
+    in
     {
-      packages.micro = self.wrapModule.micro.wrap {
+      packages.micro = micro.wrap {
         inherit pkgs;
       };
     };
