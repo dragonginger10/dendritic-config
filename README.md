@@ -2,34 +2,6 @@
 
 My NixOS and Home-Manager configuration monorepo. All my system configurations in one place.
 
-## Architecture
-
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   phos      │     │wonderland  │     │   mini     │
-│ (desktop)   │     │ (desktop)  │     │  (VM)     │
-└──────┬──────┘     └──────┬──────┘     └──────┬──────┘
-       │                   │                   │
-       └─────────┬─────────┴─────────┬─────────┘
-                 │                   │
-                 ▼                   ▼
-         ┌──────────────┐    ┌──────────────┐
-         │   system    │    │   programs  │
-         │  (base, nix │◄───│  (niri,    │
-         │   boot,     │    │   nvim,    │
-         │   desktop)  │    │  nushell)  │
-         └────────────┘    └─────┬──────┘
-                                 │
-                                 ▼
-                        ┌──────────────┐
-                        │    user     │
-                        │  (dragon)  │
-                        │ (home-mgr) │
-                        └────────────┘
-```
-
-Each host imports a stack of modules. The user module (`dragon`) provides home-manager configuration layered on top.
-
 ## Directory Structure
 
 ```
@@ -48,7 +20,7 @@ dendritic-config/
 │   │   ├── shell/         # Nushell, tmux, git
 │   │   ├── gaming/
 │   │   └── niri.nix
-│   ├── system/            # System-wide NixOS modules
+│   ├── system/            # System-wide NixOS modules such as boot loader
 │   │   ├── base/
 │   │   ├── boot/
 │   │   ├── desktop/
@@ -61,12 +33,14 @@ dendritic-config/
 
 ## How It Works
 
-This flake uses [flake-parts](https://flake.parts) combined with [import-tree](https://github.com/vic/import-tree) for automatic module discovery.
+This repo uses the [dendritic](https://github.com/mightyiam/dendritic) pattern.
+Every file is its own module, which is either imported in to another module as
+a submodule or into a host or user config. 
 
-### Module System
+### helper modules
 
-- **`lib/nixos-hosts.nix`** - Defines the `nixosHosts` option. Each host is a NixOS system built by composing modules.
-- **`lib/home-configs.nix`** - Defines the `homeConfigs` option. Each user gets a home-manager configuration.
+- **`lib/nixos-hosts.nix`** - Defines the `nixosHosts` option. All the boiler plate of a nixosConfiguration.
+- **`lib/home-configs.nix`** - Defines the `homeConfigs` option. Creates both the user config for nixos and homeManager modules as well as a homeConfiguration
 
 ### Host Definition
 
@@ -74,21 +48,18 @@ Hosts are defined in `modules/hosts/<name>/<name>.nix`:
 
 ```nix
 {
-  nixosHosts.phos.enable = true;
+  nixosHosts.<host>.enable = true; # see lib/nixos-hosts.nix for module setup
 
-  flake.modules.nixos."confs/phos" = { pkgs, lib, ... }: {
+  flake.modules.nixos."confs/<host>" = { pkgs, lib, ... }: {
     imports = with self.modules.nixos; [
       base
       nix
       boot
-      desktop
       # ...
     ];
   };
 }
 ```
-
-The module imports from `self.modules.nixos.*` are auto-discovered by import-tree.
 
 ### Flake Outputs
 
@@ -96,51 +67,20 @@ The flake produces:
 - `flake.nixosConfigurations` - All defined NixOS systems
 - `flake.homeConfigurations` - All defined home-manager configs
 - `flake.packages.*` - Custom packages
+- `flake.app.*` - apps, specifically for [flake-file](https://flake-file.oeiuwq.com/)
+- `flake.schemas.*` - Custom schema to allow checks and viewing of custom outputs
 
 ## Usage
 
-### Build a Host
+[Just](https://just.systems) is used as the command runner for this project. A full list of command can be found by running `just --list`. Most of the commands utilize [nh](https://github.com/nix-community/nh) to simplify the nix builtin command and remove the need for sudo. 
 
-```bash
-# Build phos system
-nix build .#nixosConfigurations.phos.config.system.build.toplevel
-
-# Build phos home-manager
-nix build .#homeConfigurations.dragon.config.system.build.toplevel
-```
-
-### Switch a Host (live)
-
-```bash
-# Switch phos to new config
-sudo nix --accept-flake-config run github:nix-community/nixos-rebuild -- switch --flake .#phos
-
-# Switch dragon's home-manager
-home-manager switch --flake .
-```
-
-### Development
-
-```bash
-# Check all outputs
-nix flake check
-
-# Show outputs
-nix flakes show
-
-# Update dependencies
-nix flake update
-
-# Format nix files
-nix fmt
-```
 
 ## Hosts
 
 | Host | Type | Description |
 |------|------|-------------|
 | phos | Desktop | Main desktop machine |
-| wonderland | Desktop | Secondary desktop |
+| wonderland | Desktop | laptop |
 | mini | VM | Minimal test VM |
 | wsl | WSL | Windows Subsystem for Linux |
 
@@ -168,14 +108,10 @@ nix fmt
          # add more modules...
        ];
 
-       # host-specific config
-       networking.hostName = "<name>";
        system.stateVersion = "25.11";
      };
    }
    ```
-
-3. Add the host to activation if needed in `modules/system/base/activation.nix`
 
 ## Adding a New User
 
@@ -221,9 +157,19 @@ nix fmt
 
 ```bash
 # Build mini VM
-nix build .#nixosConfigurations.mini.config.system.build.toplevel
+nh os build-vm --hostname <host> .#
 ```
 
 ## Credits
 
-Built with [flake-parts](https://flake.parts), [import-tree](https://github.com/vic/import-tree), [home-manager](https://github.com/nix-community/home-manager), [nixvim](https://github.com/nix-community/nixvim), and [stylix](https://github.com/nix-community/stylix).
+- [flake-parts](https://flake.parts) 
+- [import-tree](https://github.com/vic/import-tree) 
+- [home-manager](https://github.com/nix-community/home-manager) 
+- [nixvim](https://github.com/nix-community/nixvim) 
+- [stylix](https://github.com/nix-community/stylix)
+- [flake-file](https://flake-file.oeiuwq.com/)
+- [pkgs-by-name](https://github.com/drupol/pkgs-by-name-for-flake-parts)
+- [treefmt-nix](https://github.com/numtide/treefmt-nix)
+- [git-hooks.nix](https://github.com/cachix/git-hooks.nix)
+- [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)
+- [Determinate Nix](https://determinate.systems/)
