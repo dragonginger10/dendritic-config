@@ -21,6 +21,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook preInstall
     mkdir -p $out
     cp config.jsonc eldritch.png $out/
+    sed -i "s@~\/.config\/fastfetch\/@$out\/@" $out/config.jsonc
     runHook postInstall
   '';
 
