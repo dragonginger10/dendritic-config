@@ -30,7 +30,7 @@ switch target=host:
     echo "Formatting & Checking..."
     just check > /dev/null 2>&1 
     if [ $? -ne 0 ]; then
-        echo "Check has failed"
+        echo -e "\e[31mCheck has failed\e[0m"
         exit 1
     fi
     echo "Nixos is building..."
