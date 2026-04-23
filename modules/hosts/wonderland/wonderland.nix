@@ -6,7 +6,7 @@
   nixosHosts.wonderland.enable = true;
 
   flake.modules.nixos."confs/wonderland" =
-    { lib, ... }:
+    { pkgs, lib, ... }:
     {
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       imports = with self.modules.nixos; [
@@ -18,6 +18,10 @@
       ];
 
       boot.loader.systemd-boot.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        slack
+      ];
 
       services = {
         displayManager = {
