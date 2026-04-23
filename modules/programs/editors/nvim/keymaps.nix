@@ -66,5 +66,11 @@
       action = "<cmd>bdelete<CR>";
       options.silent = true;
     }
+    {
+      mode = "n";
+      key = "<leader>tp";
+      action = "<cmd>TypstPreviewToggle<CR>";
+      options.silent = true;
+    }
   ];
 }

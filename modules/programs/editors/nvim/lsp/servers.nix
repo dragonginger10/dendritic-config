@@ -4,6 +4,13 @@
     just.enable = true;
     bashls.enable = true;
 
+    tinymist = {
+      enable = true;
+      config = {
+        formatterMode = "typstyle";
+      };
+    };
+
     nixd = {
       enable = true;
       config = {

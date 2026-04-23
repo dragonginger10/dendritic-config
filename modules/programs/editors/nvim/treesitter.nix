@@ -16,6 +16,7 @@
             toml
             lua
             nu
+            typst
           ];
         };
       };
