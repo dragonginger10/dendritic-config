@@ -10,7 +10,7 @@
     let
       alts = config.preferences.editors.alternatives.enable;
       selfpkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
-      themed-nvim = selfpkgs.nvim.extend config.stylix.targets.nixvim.exportedModule;
+      themed-nvim = selfpkgs.neovim.extend config.stylix.targets.nixvim.exportedModule;
     in
     {
       options.preferences.editors = {
