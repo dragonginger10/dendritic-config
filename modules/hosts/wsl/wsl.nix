@@ -25,6 +25,7 @@
         enable = true;
         defaultUser = config.preferences.user.name;
       };
+      programs.nix-ld.enable = true;
 
       system.stateVersion = "25.11";
     };
