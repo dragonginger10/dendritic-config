@@ -4,13 +4,13 @@
     let
       inherit (inputs.wrappers.lib) wrapPackage;
     in
-    { pkgs, ... }:
+    { pkgs, self', ... }:
     {
       packages.fastfetch = wrapPackage {
         inherit pkgs;
         package = pkgs.fastfetch;
         flags = {
-          "-c" = "${pkgs.local.fastfetch-eldritch}/config.jsonc";
+          "-c" = "${self'.packages.fastfetch-eldritch}/config.jsonc";
         };
       };
     };

@@ -20,7 +20,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
     mkdir -p $out
-    cp config.jsonc $out/config.jsonc
+    cp config.jsonc eldritch.png $out/
     runHook postInstall
   '';
 
