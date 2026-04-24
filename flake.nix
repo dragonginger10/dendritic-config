@@ -32,6 +32,7 @@
       url = "path:./packages";
       flake = false;
     };
+    pi-zero-2.url = "github:plmercereau/nixos-pi-zero-2";
     pkgs-by-name.url = "github:drupol/pkgs-by-name-for-flake-parts";
     stylix.url = "github:nix-community/stylix";
     treefmt-nix.url = "github:numtide/treefmt-nix";

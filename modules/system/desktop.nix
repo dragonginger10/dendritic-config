@@ -11,7 +11,8 @@
         imports = with self.modules.nixos; [
           stylix
           fonts
-        ]
+        ];
+
         home-manager.users.${username}.imports = with self.modules.homeManager; [
           gui
         ];

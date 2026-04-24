@@ -53,3 +53,6 @@ bootstrap target:
     #! nix-shell -i bash --pure
     #! nix-shell -p nh 
     nh os boot --hostname {{target}}
+
+image target: 
+    nh os build-image --image-variant sdImage --hostname {{target}}
