@@ -12,15 +12,14 @@ in
     {
       nixos.${username} = {
         imports = with self.modules.nixos; [
-          basic
+          basics
+          home-manager
         ];
       };
     }
     {
       homeManager.${username} = {
-        imports = with self.modules.homeManager; [
-          shell
-        ];
+        # imports = with self.modules.homeManager; [];
         home.stateVersion = "25.11";
       };
     }

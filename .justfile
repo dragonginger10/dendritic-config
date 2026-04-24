@@ -55,4 +55,4 @@ bootstrap target:
     nh os boot --hostname {{target}}
 
 image target: 
-    nh os build-image --image-variant sdImage --hostname {{target}}
+    nh os build-image --image-variant sd-card --hostname {{target}}

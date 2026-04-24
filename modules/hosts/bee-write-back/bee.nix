@@ -2,13 +2,7 @@
 {
   flake-file.inputs.pi-zero-2.url = "github:plmercereau/nixos-pi-zero-2";
 
-  nixosHosts.bee = {
-    enable = false;
-    additionalModules = with inputs; [
-      pi-zero-2.nixosModules.sd-image
-      pi-zero-2.nixosModules.hardware
-    ];
-  };
+  nixosHosts.bee.enable = true;
 
   flake.modules.nixos."confs/bee" =
     {
@@ -20,6 +14,9 @@
       imports = with self.modules.nixos; [
         nix
         base
+        inputs.pi-zero-2.nixosModules.sd-image
+        inputs.pi-zero-2.nixosModules.hardware
+        bumblebee
       ];
 
       config = {
@@ -35,9 +32,11 @@
         };
 
         fileSystems = {
-          "/".device = "/dev/disk/by-label/NIXOS_SD";
-          fsType = "ext4";
-          options = [ "noatime" ];
+        "/" = {
+            device = "/dev/disk/by-label/NIXOS_SD";
+            options = [ "noatime" ];
+            fsType = "ext4";
+          };
         };
 
         networking = {
