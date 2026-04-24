@@ -1,5 +1,6 @@
 set quiet := true
 alias s := switch
+export NH_FLAKE := justfile_dir()
 host := `hostname`
 user := `whoami`
 
@@ -22,7 +23,7 @@ gc:
     sudo nh clean all > /dev/null 2>&1
 
 test target=host: 
-    nh os build -t -n .#{{target}}
+    nh os build --show-trace --dry --hostname {{target}}
     just gc
 
 switch target=host: 
@@ -34,14 +35,21 @@ switch target=host:
         exit 1
     fi
     echo "Nixos is building..."
-    nh os switch .#{{target}} > /dev/null 2>&1
+    nh os switch --hostname {{target}} > /dev/null 2>&1
 
 back:
     nh os rollback
 
 home:
-    nh home switch -c {{user}} --offline .
+    nh home switch --configuration {{user}} --offline 
 
 vm target=host:
-    nh os build-vm --hostname {{target}} .
+    nh os build-vm --hostname {{target}} 
     ./result/bin/run-{{target}}-vm
+
+[env("NIX_CONFIG", "experimental-features = nix-command flakes")]
+bootstrap target:
+    #!/usr/bin/env nix-shell 
+    #! nix-shell -i bash --pure
+    #! nix-shell -p nh 
+    nh os boot --hostname {{target}}
