@@ -3,6 +3,7 @@
     nushell.enable = true;
     just.enable = true;
     bashls.enable = true;
+    ruff.enable = true;
 
     tinymist = {
       enable = true;

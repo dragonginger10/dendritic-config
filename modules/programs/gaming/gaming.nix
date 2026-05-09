@@ -2,6 +2,7 @@
 {
   nixpkgs.allowedUnfreePackages = [
     "clonehero"
+    "nexusmods-app"
   ];
 
   flake.modules.nixos.gaming =
@@ -20,6 +21,8 @@
         bottles
         clonehero
         prismlauncher
+        steamtinkerlaunch
+        nexusmods-app
       ];
     };
 }
