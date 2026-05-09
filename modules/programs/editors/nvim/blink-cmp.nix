@@ -1,4 +1,8 @@
 {
+
+  nixpkgs.allowedUnfreePackages = [
+    "blink-cmp-spell"
+  ];
   flake.modules.nixvim.base.plugins.blink-cmp = {
     enable = true;
     settings = {

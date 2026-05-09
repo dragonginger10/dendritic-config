@@ -21,8 +21,6 @@
         bottles
         clonehero
         prismlauncher
-        steamtinkerlaunch
-        nexusmods-app
       ];
     };
 }
