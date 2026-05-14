@@ -18,6 +18,7 @@
 
       programs = {
         discord.enable = true;
+        spotify-player.enable = true;
         ghostty = {
           enable = true;
           settings = {
