@@ -4,6 +4,9 @@
 }:
 {
   nixosHosts.wonderland.enable = true;
+  nixpkgs.allowedUnfreePackages = [
+    "slack"
+  ];
 
   flake.modules.nixos."confs/wonderland" =
     { pkgs, lib, ... }:
