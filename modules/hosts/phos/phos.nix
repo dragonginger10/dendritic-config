@@ -3,6 +3,9 @@
   ...
 }:
 {
+  nixpkgs.allowedUnfreePackages = [
+    "claude-code"
+  ];
   nixosHosts.phos.enable = true;
 
   flake.modules.nixos."confs/phos" =
@@ -24,6 +27,7 @@
       environment.systemPackages = with pkgs; [
         ani-cli
         deluge
+        claude-code
         openhue-cli
         opencode
         wtwitch

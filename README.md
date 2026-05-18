@@ -1,12 +1,25 @@
 # Dendritic Config
 
-My NixOS and Home-Manager configuration monorepo. All my system configurations in one place.
+My NixOS and Home-Manager configuration monorepo. Covers a Wayland-first desktop (Niri compositor) and laptop, a gaming-capable setup with Steam + GPU recording, and a Nushell + Neovim development environment — all declared in one place.
+
+## What's Configured
+
+| Area | Tools |
+|------|-------|
+| Shell & CLI | Nushell, Starship (eldritch theme), Zoxide, Carapace, Tmux, Eza, Direnv |
+| Editor | Neovim (nixvim) — LSP, Treesitter, Telescope, Blink completions; Micro |
+| Desktop | Niri (Wayland compositor), Stylix theming, custom Plymouth splash, Ghostty terminal |
+| Gaming | Steam + Proton + SteamTinkerLaunch, Gamemode, GPU Screen Recorder, CloneHero, Prism Launcher |
+| Apps | Zen Browser, Discord + discover-overlay, Mattermost, Flatpak |
+| Dev tooling | Claude Code, Direnv, nix-gaming cachix |
+| Custom packages | eldritch-starship, dracula-plymouth, fastfetch-eldritch, glazepkg |
 
 ## Directory Structure
 
 ```
 dendritic-config/
 ├── flake.nix              # Flake entry point using flake-parts
+├── .justfile              # Just command runner recipes
 ├── modules/
 │   ├── hosts/             # Machine-specific NixOS configurations
 │   │   ├── phos/
@@ -16,15 +29,19 @@ dendritic-config/
 │   ├── users/             # User-specific home-manager + NixOS options
 │   │   └── dragon/
 │   ├── programs/          # Application configurations
-│   │   ├── editors/       # Neovim,etc
-│   │   ├── shell/         # Nushell, tmux, git
-│   │   ├── gaming/
-│   │   └── niri.nix
-│   ├── system/            # System-wide NixOS modules such as boot loader
+│   │   ├── editors/       # Neovim (nixvim), Micro
+│   │   ├── shell/         # Nushell, Tmux, Git, Starship, Zoxide
+│   │   ├── gaming/        # Steam, GPU recorder, game tools
+│   │   └── niri.nix       # Wayland compositor config
+│   ├── system/            # System-wide NixOS modules
 │   │   ├── base/
-│   │   ├── boot/
-│   │   ├── desktop/
+│   │   ├── boot.nix
+│   │   ├── desktop.nix
+│   │   ├── fonts.nix
+│   │   ├── sound.nix
+│   │   ├── stylix.nix
 │   │   └── nix/
+│   ├── services/          # System services (e.g. Flatpak)
 │   └── lib/               # Flake-parts module definitions
 │       ├── nixos-hosts.nix    # Defines nixosHosts option
 │       └── home-configs.nix   # Defines homeConfigs option
@@ -72,17 +89,27 @@ The flake produces:
 
 ## Usage
 
-[Just](https://just.systems) is used as the command runner for this project. A full list of command can be found by running `just --list`. Most of the commands utilize [nh](https://github.com/nix-community/nh) to simplify the nix builtin command and remove the need for sudo. 
+[Just](https://just.systems) is used as the command runner for this project. Most commands use [nh](https://github.com/nix-community/nh) to simplify Nix operations and remove the need for sudo.
+
+```bash
+just switch        # fmt + check + build + activate (current host)
+just switch phos   # same, targeting a specific host
+just home          # switch home-manager config for current user
+just test          # dry-run build to check for errors
+just vm            # build and launch a VM for the current host
+just up            # update flake inputs
+just --list        # full command reference
+```
 
 
 ## Hosts
 
-| Host | Type | Description |
-|------|------|-------------|
-| phos | Desktop | Main desktop machine |
-| wonderland | Desktop | laptop |
-| mini | VM | Minimal test VM |
-| wsl | WSL | Windows Subsystem for Linux |
+| Host | Type | DE / Compositor | Notable extras |
+|------|------|-----------------|----------------|
+| phos | Desktop | Niri (Wayland) | Steam, GPU Screen Recorder, Claude Code, gaming modules |
+| wonderland | Laptop | COSMIC | Slack, no gaming modules |
+| mini | VM | LXQT + LightDM | Minimal config for testing |
+| wsl | WSL | headless | NixOS-WSL integration |
 
 ## Adding a New Host
 
@@ -167,9 +194,11 @@ nh os build-vm --hostname <host> .#
 - [home-manager](https://github.com/nix-community/home-manager) 
 - [nixvim](https://github.com/nix-community/nixvim) 
 - [stylix](https://github.com/nix-community/stylix)
+- [nh](https://github.com/nix-community/nh)
 - [flake-file](https://flake-file.oeiuwq.com/)
 - [pkgs-by-name](https://github.com/drupol/pkgs-by-name-for-flake-parts)
 - [treefmt-nix](https://github.com/numtide/treefmt-nix)
 - [git-hooks.nix](https://github.com/cachix/git-hooks.nix)
 - [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)
+- [nix-gaming](https://github.com/fufexan/nix-gaming)
 - [Determinate Nix](https://determinate.systems/)
