@@ -27,6 +27,7 @@ in
           dragon-packages
           stylix
           shell
+          developer
         ];
         home.stateVersion = "25.11";
       };
