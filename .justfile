@@ -15,8 +15,10 @@ flake:
 check: fmt flake
     nix flake check
 
-up:
+up: flake
     nix flake update
+    git add ./flake.lock
+    git commit -m "{{datetime('%F')}}: updated flake.lock"
 
 gc:
     echo "Cleaning ..."
