@@ -4,6 +4,7 @@
     just.enable = true;
     bashls.enable = true;
     ruff.enable = true;
+    gopls.enable = true;
 
     tinymist = {
       enable = true;
