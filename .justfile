@@ -1,4 +1,4 @@
-set quiet := true
+set quiet
 alias s := switch
 export NH_FLAKE := justfile_dir()
 host := `hostname`
@@ -18,17 +18,17 @@ check: fmt flake
 up: flake
     nix flake update
     git add ./flake.lock
-    git commit -m "{{datetime('%F')}}: updated flake.lock"
+    git commit -m "{{ datetime('%F') }}: updated flake.lock"
 
 gc:
     echo "Cleaning ..."
     sudo nh clean all > /dev/null 2>&1
 
-test target=host: 
-    nh os build --show-trace --dry --hostname {{target}}
+test target=host:
+    nh os build --show-trace --dry --hostname {{ target }}
     just gc
 
-switch target=host: 
+switch target=host:
     #!/usr/bin/env bash
     echo "Formatting & Checking..."
     just check > /dev/null 2>&1 
@@ -37,24 +37,24 @@ switch target=host:
         exit 1
     fi
     echo "Nixos is building..."
-    nh os switch --hostname {{target}} > /dev/null 2>&1
+    nh os switch --hostname {{ target }} > /dev/null 2>&1
 
 back:
     nh os rollback
 
 home:
-    nh home switch --configuration {{user}} --offline 
+    nh home switch --configuration {{ user }} --offline 
 
 vm target=host:
-    nh os build-vm --hostname {{target}} 
-    ./result/bin/run-{{target}}-vm
+    nh os build-vm --hostname {{ target }} 
+    ./result/bin/run-{{ target }}-vm
 
 [env("NIX_CONFIG", "experimental-features = nix-command flakes")]
 bootstrap target:
     #!/usr/bin/env nix-shell 
     #! nix-shell -i bash --pure
     #! nix-shell -p nh 
-    nh os boot --hostname {{target}}
+    nh os boot --hostname {{ target }}
 
-image target: 
-    nh os build-image --image-variant sd-card --hostname {{target}}
+image target:
+    nh os build-image --image-variant sd-card --hostname {{ target }}
