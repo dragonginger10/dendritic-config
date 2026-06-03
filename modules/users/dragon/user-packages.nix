@@ -10,7 +10,6 @@
       ];
       programs = {
         bat.enable = true;
-        lazygit.enable = true;
         btop.enable = true;
         fzf.enable = true;
         command-not-found.enable = true;

@@ -9,7 +9,7 @@
   flake-file.inputs.nixos-wsl.url = lib.mkDefault "github:nix-community/NixOS-WSL";
 
   flake.modules.nixos."confs/wsl" =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       nixpkgs.hostPlatform = "x86_64-linux";
       imports = with self.modules.nixos; [
@@ -25,8 +25,14 @@
       wsl = {
         enable = true;
         defaultUser = config.preferences.user.name;
+        useWindowsDriver = true;
       };
+
       programs.nix-ld.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        noctalia-shell
+      ];
 
       system.stateVersion = "25.11";
     };

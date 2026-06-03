@@ -1,9 +1,9 @@
 set quiet
 alias s := switch
 export NH_FLAKE := justfile_dir()
+export NIX_CONFIG := "experimental-features = nix-command flakes"
 host := `hostname`
 user := `whoami`
-
 default: check
 
 fmt:
@@ -49,12 +49,12 @@ vm target=host:
     nh os build-vm --hostname {{ target }} 
     ./result/bin/run-{{ target }}-vm
 
-[env("NIX_CONFIG", "experimental-features = nix-command flakes")]
-bootstrap target:
+# [env("NIX_CONFIG", "experimental-features = nix-command flakes")]
+bootstrap target :
     #!/usr/bin/env nix-shell 
     #! nix-shell -i bash --pure
     #! nix-shell -p nh 
-    nh os boot --hostname {{ target }}
+    nh os boot --hostname {{target}} .
 
 image target:
     nh os build-image --image-variant sd-card --hostname {{ target }}
