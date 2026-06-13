@@ -5,6 +5,7 @@
     bashls.enable = true;
     ruff.enable = true;
     gopls.enable = true;
+    lua_ls.enable = true;
 
     tinymist = {
       enable = true;

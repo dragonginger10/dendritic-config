@@ -15,7 +15,7 @@
         shell.enableNushellIntegration = true;
 
         shellAliases = {
-          cp = "cp --recursive == verbose";
+          cp = "cp --recursive --verbose";
           mk = "mkdir";
           rm = "rm --recursive --verbose";
           x = "eza --icons";

@@ -21,8 +21,6 @@ in
     }
     {
       homeManager.${username} = {
-        #set to new behaviour for gtk
-        gtk.gtk4.theme = null;
         imports = with self.modules.homeManager; [
           dragon-packages
           stylix
