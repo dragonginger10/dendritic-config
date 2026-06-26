@@ -22,6 +22,7 @@
         displayManager
         desktop
         vm
+        syncthing
       ];
 
       environment.systemPackages = with pkgs; [
