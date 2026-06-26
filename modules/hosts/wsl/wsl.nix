@@ -29,10 +29,7 @@
       };
 
       programs.nix-ld.enable = true;
-
-      environment.systemPackages = with pkgs; [
-        noctalia-shell
-      ];
+      environment.localBinInPath = true;
 
       system.stateVersion = "25.11";
     };
