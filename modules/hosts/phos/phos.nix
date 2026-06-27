@@ -28,9 +28,7 @@
       environment.systemPackages = with pkgs; [
         ani-cli
         deluge
-        claude-code
         openhue-cli
-        opencode
         wtwitch
         twitch-tui
         nyaa
