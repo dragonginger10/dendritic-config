@@ -3,6 +3,7 @@
   appimageTools,
   fetchurl,
   makeDesktopItem,
+  runCommand,
   symlinkJoin,
 }:
 
@@ -24,10 +25,21 @@ let
       ];
   };
 
+  iconPkg = runCommand "antra-icon" { } ''
+    mkdir -p $out/share/icons/hicolor/128x128/apps
+    cp ${
+      fetchurl {
+        url = "https://raw.githubusercontent.com/anandprtp/Antra/refs/heads/main/antra-wails/build/appicon.png";
+        hash = "sha256-3I+X3Q7M+lrdDD2fps2vOZ8GDNzln8vQBv7D8nvaw6s=";
+      }
+    } $out/share/icons/hicolor/128x128/apps/${pname}.png
+  '';
+
   desktopItem = makeDesktopItem {
     name = pname;
     desktopName = "Antra";
     exec = "antra";
+    icon = pname;
     comment = "Convert music links from streaming services into a local music library";
     categories = [
       "AudioVideo"
@@ -41,6 +53,7 @@ symlinkJoin {
   paths = [
     wrapped
     desktopItem
+    iconPkg
   ];
 
   meta = {
