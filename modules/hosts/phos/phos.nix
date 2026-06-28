@@ -23,6 +23,7 @@
         desktop
         vm
         syncthing
+        avahi
       ];
 
       environment.systemPackages = with pkgs; [
