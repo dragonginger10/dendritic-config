@@ -7,6 +7,7 @@
         epy
         glow
         sc-im
+        zk
       ];
       programs = {
         bat.enable = true;

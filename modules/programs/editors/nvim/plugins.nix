@@ -20,5 +20,6 @@
     which-key.enable = true;
     yazi.enable = true;
     ccc.enable = true;
+    zk.enable = true;
   };
 }
