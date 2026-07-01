@@ -9,7 +9,7 @@ let
 in
 {
   config.flake-file.inputs.nixpkgs-stable.url =
-    lib.mkDefault "github:NixOS/nixpkgs/nixos-25.11-small";
+    lib.mkDefault "github:NixOS/nixpkgs/nixos-26.05-small";
   options.nixosHosts =
     with types;
     let
