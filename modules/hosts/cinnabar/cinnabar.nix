@@ -1,10 +1,10 @@
 { self, ... }: {
-  nixosHosts.cinnabar.enable = false;
+  nixosHosts.cinnabar.enable = true;
   flake.modules.nixos."confs/cinnabar" = { pkgs, ... }: {
-    # TODO: Get config from image
     imports = with self.modules.nixos; [
       kongo
     ];
+
     networking = {
       useDHCP = false;
       usePredicatbleInterfaceNames = false;
@@ -20,6 +20,12 @@
     services.openssh = {
       enable = true;
       settings.permitRootLogin = "no";
+    };
+
+    users.users.kongo = {
+      openssh.authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos"
+      ];
     };
 
     system.stateVersion = "26.05";
