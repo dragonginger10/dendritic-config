@@ -1,0 +1,3 @@
+{
+  nixosHosts.cinnabar.enable = false;
+}
