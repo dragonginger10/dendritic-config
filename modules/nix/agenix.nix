@@ -31,7 +31,6 @@
         (lib.mkAliasOptionModule [ "secrets" ] [ "age" "secrets" ])
         inputs.agenix.nixosModules.default
         inputs.agenix-rekey.nixosModules.default
-        self.modules.nixos.ssh
       ];
 
       environment.systemPackages = [
@@ -41,11 +40,15 @@
 
       services.pcscd.enable = true;
 
-      age.rekey = {
-        hostPubkey = builtins.elemAt config.preferences.keys 0;
-        storageMode = "local";
-        masterIdentities = [ ../../.secrets/age-yubikey-identity.pub ];
-        localStorageDir = ../../.secrets/${config.networking.hostName};
+      age = {
+        identityPaths = [
+          "/home/dragon/.ssh/id_ed25519"
+        ];
+        rekey = {
+          storageMode = "local";
+          masterIdentities = [ ../../.secrets/age-yubikey-identity.pub ];
+          localStorageDir = ../../.secrets/${config.networking.hostName};
+        };
       };
     };
 }

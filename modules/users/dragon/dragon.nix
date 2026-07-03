@@ -12,11 +12,10 @@ in
     (self.lib.user username true)
     {
       nixos.${username} = {
-        preferences.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos"
-        ];
-        age.secrets.linode.rekeyFile = ./linode.age;
+        age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos";
+        secrets.linode.rekeyFile = ./linode.age;
         imports = with self.modules.nixos; [
+          agenix
           environment
           editors
           home-manager
