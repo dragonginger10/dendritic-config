@@ -25,7 +25,6 @@
         vm
         syncthing
         avahi
-        ssh
       ];
 
       environment.systemPackages = with pkgs; [
