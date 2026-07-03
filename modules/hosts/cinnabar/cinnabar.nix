@@ -7,6 +7,7 @@
       kongo
       vm
       caddy
+      ssh
     ];
 
     networking = {
@@ -20,11 +21,6 @@
       sysstat
       inetutils
     ];
-
-    services.openssh = {
-      enable = true;
-      settings.PermitRootLogin = "no";
-    };
 
     users.users.kongo = {
       openssh.authorizedKeys.keys = [
