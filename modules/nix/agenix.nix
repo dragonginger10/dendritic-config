@@ -27,10 +27,21 @@
       ...
     }:
     {
-      # imports = [ (lib.mkAliasOptionModule [ "secrets" ] [ "age" "secrets" ]) ];
-      environment.systemPackages = [ pkgs.rage ];
+      imports = [
+        (lib.mkAliasOptionModule [ "secrets" ] [ "age" "secrets" ])
+        inputs.agenix.nixosModules.default
+        inputs.agenix-rekey.nixosModules.default
+      ];
+
+      environment.systemPackages = [
+        pkgs.rage
+        pkgs.age-plugin-yubikey
+      ];
+
+      services.pcscd.enable = true;
 
       age.rekey = {
+        hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos";
         storageMode = "local";
         masterIdentities = [ ../../.secrets/age-yubikey-identity.pub ];
         localStorageDir = ../.././secrets/${config.networking.hostName};
