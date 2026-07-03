@@ -1,9 +1,15 @@
 {
-  flake.modules.nixos.avahi = {
-    services.avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
+  flake.modules.nixos.avahi = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      system-config-printer
+    ];
+    services = {
+      printing.enable = true;
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+      };
     };
   };
 }
