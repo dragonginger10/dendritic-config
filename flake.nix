@@ -41,6 +41,10 @@
     };
     pkgs-by-name.url = "github:drupol/pkgs-by-name-for-flake-parts";
     stylix.url = "github:nix-community/stylix";
+    terranix = {
+      url = "github:terranix/terranix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     treefmt-nix.url = "github:numtide/treefmt-nix";
     wrappers = {
       url = "github:BirdeeHub/nix-wrapper-modules";
