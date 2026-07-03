@@ -58,3 +58,11 @@ bootstrap target :
 
 image target:
     nh os build-image --image-variant sd-card --hostname {{ target }}
+
+# deploy to a host, requires username and password
+deploy target user ip:
+    echo -e "\n=> Deploying to {{target}}"
+    nh os switch \
+        --hostname {{target}} \
+        --target-host {{user}}@{{ip}} \
+        --build-host {{user}}@{{ip}} 
