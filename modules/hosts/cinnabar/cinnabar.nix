@@ -6,6 +6,7 @@
       nix
       kongo
       vm
+      caddy
     ];
 
     networking = {
