@@ -17,6 +17,7 @@
           statix
           home-manager
           jujutsu
+          config.agenix-rekey.package
         ];
         shellHook = ''
           ${config.pre-commit.shellHook}
