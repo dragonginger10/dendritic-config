@@ -16,6 +16,10 @@
           default = "eldritch";
         };
 
+        keys = mkOption {
+          type = with types; listOf str;
+        };
+
         autostart = mkOption {
           type = types.listOf (types.either types.str types.package);
           default = [ ];

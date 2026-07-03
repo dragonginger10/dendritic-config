@@ -1,13 +1,16 @@
 { self, ... }: {
   nixosHosts.cinnabar.enable = true;
-  flake.modules.nixos."confs/cinnabar" = { pkgs, ... }: {
+  flake.modules.nixos."confs/cinnabar" = { config, pkgs, ... }: {
     imports = with self.modules.nixos; [
+      base
+      nix
       kongo
+      vm
     ];
 
     networking = {
       useDHCP = false;
-      usePredicatbleInterfaceNames = false;
+      usePredictableInterfaceNames = false;
       interfaces.eth0.useDHCP = true;
     };
 
@@ -19,13 +22,11 @@
 
     services.openssh = {
       enable = true;
-      settings.permitRootLogin = "no";
+      settings.PermitRootLogin = "no";
     };
 
     users.users.kongo = {
-      openssh.authorizedKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos"
-      ];
+      openssh.authorizedKeys.keys = config.preferences.keys;
     };
 
     system.stateVersion = "26.05";
