@@ -26,7 +26,9 @@
     };
 
     users.users.kongo = {
-      openssh.authorizedKeys.keys = config.preferences.keys;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos"
+      ];
     };
 
     system.stateVersion = "26.05";

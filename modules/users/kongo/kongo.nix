@@ -13,9 +13,10 @@ in
     {
       nixos.${username} = {
         imports = with self.modules.nixos; [
-          basic
+          basics
           editors
           home-manager
+          stylix
         ];
       };
     }

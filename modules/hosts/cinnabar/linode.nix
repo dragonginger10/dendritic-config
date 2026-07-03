@@ -1,7 +1,12 @@
-{
-  PerSystem = { pkgs, ... }: {
-    terranix.terranixConfiguration.cinnabar = {
-      modules = [ ];
+{ self, ... }: {
+  perSystem = { config, pkgs, ... }: {
+    terranix.terranixConfigurations.cinnabar = {
+      modules = [ self.modules.terranixModules.cinnabar ];
+      terraformWrapper.package = pkgs.opentofu;
+      terraformWrapper.prefixText = ''
+        TF_VAR_token="$(cat /run/agenix/linode)"
+        export TF_VAR_token
+      '';
     };
   };
 
@@ -19,8 +24,10 @@
       image = "linode/arch";
       region = "us-central";
       type = "g6-standard-1";
-      authorized_keys = config.preferences.keys;
-      root_pass = "totallyunsafe";
+      authorized_keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos"
+      ];
+      root_pass = "WonderfullyInsecureLogin";
     };
   };
 }
