@@ -8,6 +8,7 @@
       vm
       caddy
       ssh
+      actual
     ];
 
     networking = {

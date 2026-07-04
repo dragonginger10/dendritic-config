@@ -2,16 +2,24 @@
   flake.modules.nixos.caddy = { pkgs, ... }: {
     services.caddy = {
       enable = true;
-      virtualHosts."dragonslibrary.xyz".extraConfig = ''
-        encode gzip
-        file_server
-        root * ${
-          pkgs.runCommand "testdir" { } ''
-            mkdir "$out"
-            echo hello world > "$out/index.html"
-          ''
-        }
-      '';
+      virtualHosts = {
+        "dragonslibrary.xyz".extraConfig = ''
+          encode gzip 
+          file_server
+          root * ${
+            pkgs.runCommand "testdir" { } ''
+              mkdir "$out"
+              echo hello world > "$out/index.html"
+            ''
+          }
+        '';
+
+        "budget.dragonslibrary.xyz".extraConfig = ''
+          encode gzip zstd
+          reverse_proxy localhost:5006
+        '';
+
+      };
     };
 
     networking.firewall = {

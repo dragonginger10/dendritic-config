@@ -31,7 +31,7 @@
       linode_instance.vps = {
         label = "cinnabar";
         region = "us-central";
-        type = "g6-standard-1";
+        type = "g6-standard-2";
       };
 
       linode_instance_disk = {
