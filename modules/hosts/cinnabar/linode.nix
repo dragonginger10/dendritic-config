@@ -77,6 +77,17 @@
         proxied = false;
         comment = "Domain verification";
       };
+
+      cloudflare_dns_record.subs = {
+        name = "*";
+        zone_id = variable.zone_id.default;
+        content = variable.domain.default;
+        type = "CNAME";
+        ttl = 60;
+        proxied = false;
+        comment = "Domain verification";
+      };
+
     };
 
   };
