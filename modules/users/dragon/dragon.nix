@@ -26,6 +26,11 @@ in
             owner = username;
             group = "users";
           };
+          sshkey = {
+            rekeyFile = ./sshkey.age;
+            path = "/home/dragon/.ssh/id_ed25519";
+            generator.script = "passphrase";
+          };
         };
         imports = with self.modules.nixos; [
           agenix
