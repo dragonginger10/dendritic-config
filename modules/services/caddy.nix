@@ -16,7 +16,7 @@
 
         "budget.dragonslibrary.xyz".extraConfig = ''
           encode gzip zstd
-          reverse_proxy localhost:5006
+          reverse_proxy http://127.0.0.1:3000
         '';
 
       };

@@ -1,6 +1,6 @@
 {
   flake.modules.nixos.actual = {
-    services.actucal = {
+    services.actual = {
       enable = true;
       openFirewall = true;
     };
