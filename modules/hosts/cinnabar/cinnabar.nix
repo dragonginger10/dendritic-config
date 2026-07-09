@@ -9,6 +9,7 @@
       caddy
       ssh
       actual
+      docker
     ];
 
     networking = {
