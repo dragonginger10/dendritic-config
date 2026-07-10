@@ -6,9 +6,7 @@
       nix
       kongo
       vm
-      caddy
       ssh
-      actual
       docker
     ];
 
