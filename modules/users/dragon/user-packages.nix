@@ -8,6 +8,7 @@
         glow
         sc-im
         zk
+        buku
       ];
       programs = {
         bat.enable = true;
