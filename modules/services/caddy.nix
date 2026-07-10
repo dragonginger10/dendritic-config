@@ -23,6 +23,10 @@
           reverse_proxy http://127.0.0.1:8000
         '';
 
+        "grist.dragonslibrary.xyz".extraConfig = ''
+          reverse_proxy http://127.0.0.1:8484
+        '';
+
       };
     };
 
