@@ -12,6 +12,7 @@
     { config, pkgs, ... }:
     {
       nixpkgs.hostPlatform = "x86_64-linux";
+      age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMc+liCDZpVpeDt6cj5UJscoKxqmjKR4vMD6RNV+yAR dragon@wsl";
       imports = with self.modules.nixos; [
         inputs.nixos-wsl.nixosModules.wsl
 
