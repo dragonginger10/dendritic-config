@@ -12,20 +12,6 @@ in
     (self.lib.user username true)
     {
       nixos.${username} = {
-        secrets = {
-          cloudapi = {
-            rekeyFile = ./cloudapi.age;
-            mode = "770";
-            owner = username;
-            group = "users";
-          };
-          linode = {
-            rekeyFile = ./linode.age;
-            mode = "770";
-            owner = username;
-            group = "users";
-          };
-        };
         imports = with self.modules.nixos; [
           agenix
           environment

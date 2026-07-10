@@ -24,6 +24,7 @@
         desktop
         vm
         syncthing
+        secrets
         avahi
       ];
 
