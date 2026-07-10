@@ -8,6 +8,8 @@
       vm
       ssh
       docker
+      pufferpanel
+      caddy
     ];
 
     networking = {

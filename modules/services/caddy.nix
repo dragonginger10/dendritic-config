@@ -14,9 +14,13 @@
           }
         '';
 
-        "budget.dragonslibrary.xyz".extraConfig = ''
-          encode gzip zstd
-          reverse_proxy http://127.0.0.1:3000
+        # "budget.dragonslibrary.xyz".extraConfig = ''
+        #   encode gzip zstd
+        #   reverse_proxy http://127.0.0.1:3000
+        # '';
+
+        "panel.dragonslibrary.xyz".extraConfig = ''
+          reverse_proxy http://127.0.0.1:8080
         '';
 
       };
