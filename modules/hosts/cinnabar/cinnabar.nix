@@ -8,7 +8,6 @@
       vm
       ssh
       docker
-      pufferpanel
       caddy
     ];
 
@@ -22,6 +21,7 @@
       mtr
       sysstat
       inetutils
+      lazydocker
     ];
 
     users.users.kongo = {
