@@ -20,7 +20,7 @@
         environment.systemPackages = with pkgs; [
           selfpkgs.zen-browser
           selfpkgs.antra
-          selfpkgs.grist
+          selfpkgs.grist-desktop
           gpu-screen-recorder-gtk
           noctalia-shell
           xwayland-satellite

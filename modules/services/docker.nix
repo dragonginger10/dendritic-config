@@ -6,7 +6,6 @@
     in
     {
       virtualisation.docker.enable = true;
-      users.previlegedGroups = [ "docker" ];
       networking.firewall.trustedInterfaces = [ "docker0" ];
       users.users.${username}.extraGroups = [ "docker" ];
     };
