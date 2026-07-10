@@ -12,7 +12,6 @@
         volumes = [
           "palworld:/data"
         ];
-        restart = "unless-stopped";
       };
     };
 
