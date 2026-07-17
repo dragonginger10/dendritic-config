@@ -8,7 +8,7 @@
       vm
       ssh
       docker
-      caddy
+      traefik
     ];
 
     networking = {
