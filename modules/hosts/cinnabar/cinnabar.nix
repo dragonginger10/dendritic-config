@@ -8,7 +8,6 @@
       vm
       ssh
       docker
-      traefik
     ];
 
     networking = {
