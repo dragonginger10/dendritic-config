@@ -21,12 +21,19 @@
         stylix
         determinate
         dragon
+        secrets
       ];
 
       wsl = {
         enable = true;
         defaultUser = config.preferences.user.name;
         useWindowsDriver = true;
+        usbip = {
+          enable = true;
+          autoAttach = [
+            "2-2"
+          ];
+        };
       };
 
       programs.nix-ld.enable = true;
