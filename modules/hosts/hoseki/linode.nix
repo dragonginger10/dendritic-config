@@ -39,7 +39,7 @@
           linode_id = "\${linode_instance.vps.id}";
           label = "nixos";
           size = "\${linode_instance.vps.specs.0.disk - 1024}";
-          image = "private/39801950";
+          image = "private/40106193";
           root_pass = "tottally useless password";
         };
         swap = {
