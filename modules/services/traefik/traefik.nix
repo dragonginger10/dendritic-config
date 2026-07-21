@@ -1,6 +1,11 @@
 {
   flake.modules.nixos.traefik = { config, ... }: {
-    secrets."cfTraefik.env".rekeyFile = ./cfTraefik.age;
+    secrets."cfTraefik.env" = {
+      rekeyFile = ./cfTraefik.age;
+      mode = "660";
+      owner = "traefik";
+      group = "traefik";
+    };
 
     networking.firewall.allowedTCPPorts = [
       80
@@ -9,11 +14,12 @@
 
     services.traefik = {
       enable = true;
-      staticConfigOptions = {
 
-        environmentFile = [
-          config.secrets."cfTraefik.env".path
-        ];
+      environmentFiles = [
+        "/run/agenix/cfTraefik.env"
+      ];
+
+      staticConfigOptions = {
 
         entryPoints = {
           web = {
@@ -27,7 +33,7 @@
           websecure = {
             address = ":443";
             asDefault = true;
-            http.tls.certResolver = "letsencrypt";
+            http.tls.certResolver = "le";
           };
         };
 
@@ -37,12 +43,10 @@
           format = "json";
         };
 
-        certificatseResolvers.letsencrypt.acme = {
+        certificatesResolvers.le.acme = {
           email = "dragonginger10@gmail.com";
           storage = "${config.services.traefik.dataDir}/acme.json";
-          dnschallenge = {
-            provider = "cloudflare";
-          };
+          dnsChallenge.provider = "cloudflare";
         };
 
       };
