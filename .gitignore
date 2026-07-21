@@ -3,4 +3,4 @@
 *.qcow2
 result
 /.pre-commit-config.yaml
-/cinnabar
+/hoseki
