@@ -16,7 +16,7 @@
     };
 
     virtualisation.oci-containers.containers.grist = {
-      image = "gristlabs/grist";
+      image = "gristlabs/grist-oss";
       ports = [ "8484:8484" ];
       volumes = [ "grist:/persist" ];
       environmentFiles = [

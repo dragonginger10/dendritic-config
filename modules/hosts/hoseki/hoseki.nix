@@ -7,9 +7,10 @@
       cinnabar
       ssh
       agenix
+      traefik
     ];
 
-    # age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJy5D93Si0kwEHZ8krIPAMK6hB/FrSbigtCLDWe4Fjm5 cinnabar@nixos";
+    age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJy5D93Si0kwEHZ8krIPAMK6hB/FrSbigtCLDWe4Fjm5 cinnabar@nixos";
 
     networking = {
       useDHCP = false;
