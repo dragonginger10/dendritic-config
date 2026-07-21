@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos."confs/cinnabar" = { lib, modulesPath, ... }: {
+  flake.modules.nixos."confs/hoseki" = { lib, modulesPath, ... }: {
     imports = [
       (modulesPath + "/profiles/qemu-guest.nix")
     ];

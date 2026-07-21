@@ -1,7 +1,7 @@
 { self, ... }: {
   perSystem = { pkgs, ... }: {
-    terranix.terranixConfigurations.cinnabar = {
-      modules = [ self.modules.terranixModules.cinnabar ];
+    terranix.terranixConfigurations.hoseki = {
+      modules = [ self.modules.terranixModules.hoseki ];
       terraformWrapper.package = pkgs.opentofu;
       terraformWrapper.prefixText = ''
         TF_VAR_linodeapi="$(cat /run/agenix/linode)"
@@ -12,7 +12,7 @@
     };
   };
 
-  flake.modules.terranixModules.cinnabar = rec {
+  flake.modules.terranixModules.hoseki = rec {
     variable = {
       linodeapi.sensitive = true;
       zone_id.default = "5f2767cb21a39e2115e3f02ca3d2ad9a";
@@ -29,7 +29,7 @@
 
     resource = {
       linode_instance.vps = {
-        label = "cinnabar";
+        label = "hoseki";
         region = "us-central";
         type = "g6-standard-2";
       };

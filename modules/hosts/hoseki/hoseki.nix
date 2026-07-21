@@ -1,14 +1,15 @@
 { self, ... }: {
-  nixosHosts.cinnabar.enable = true;
-  flake.modules.nixos."confs/cinnabar" = { config, pkgs, ... }: {
+  nixosHosts.hoseki.enable = true;
+  flake.modules.nixos."confs/hoseki" = { config, pkgs, ... }: {
     imports = with self.modules.nixos; [
       base
       nix
-      kongo
-      vm
+      cinnabar
       ssh
-      docker
+      agenix
     ];
+
+    # age.rekey.hostPubkey = "";
 
     networking = {
       useDHCP = false;
@@ -23,9 +24,10 @@
       lazydocker
     ];
 
-    users.users.kongo = {
+    users.users.cinnabar = {
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMc+liCDZpVpeDt6cj5UJscoKxqmjKR4vMD6RNV+yAR dragon@wsl"
       ];
     };
 
