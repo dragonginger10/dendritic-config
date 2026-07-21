@@ -26,6 +26,9 @@
       pkgs,
       ...
     }:
+    let
+      username = config.preferences.user.name;
+    in
     {
       imports = [
         (lib.mkAliasOptionModule [ "secrets" ] [ "age" "secrets" ])
@@ -42,7 +45,7 @@
 
       age = {
         identityPaths = [
-          "/home/dragon/.ssh/id_ed25519"
+          "/home/${username}/.ssh/id_ed25519"
         ];
         rekey = {
           storageMode = "local";
