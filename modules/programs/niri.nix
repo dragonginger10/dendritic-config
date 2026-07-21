@@ -34,6 +34,9 @@
               always-center-single-column = true;
               empty-workspace-above-first = true;
             };
+            outputs."Lenovo Group Limited Legion Glass2 0x00000011" = {
+              scale = 1;
+            };
             layer-rules = [
               {
                 matches = [ { namespace = "^noctalia-overview"; } ];
@@ -129,6 +132,8 @@
                 "Mod+Shift+R".set-dynamic-cast-window = _: { };
                 "Mod+Ctrl+R".set-dynamic-cast-monitor = _: { };
                 "Mod+Alt+R".clear-dynamic-cast-target = _: { };
+                "Mod+M".focus-monitor-next = _: { };
+                "Mod+Shift+M".move-workspace-to-monitor-next = _: { };
 
                 "Mod+Ctrl+L" = {
                   spawn = noctalia "lockScreen lock";
