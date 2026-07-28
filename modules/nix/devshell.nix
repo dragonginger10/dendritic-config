@@ -12,6 +12,7 @@
         NIX_CONFIG = "experimental-features = nix-command flakes pipe-operators";
         packages = with pkgs; [
           nh
+          nufmt
           just
           nixd
           nix-update

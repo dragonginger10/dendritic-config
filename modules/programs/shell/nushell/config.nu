@@ -2,7 +2,7 @@ $env.config.show_banner = false
 $env.config.edit_mode = "vi"
 $env.EDITOR = "nvim"
 
-# script for monday aim reports
+# script for monday aim reports 
 export def aim [--keep(-k)] {
     const report = '~/Downloads/#Events by Locations_Full Data_data.csv'
     let today = date now | format date '%Y-%m-%d'
@@ -11,20 +11,19 @@ export def aim [--keep(-k)] {
         error make {msg: 'Aim-data not installed'}
     }
 
-    aim-data $report
-    open result.csv | select `Door Name` `Count` `Week Of` `Common Cause` | to tsv | tail -n +2 | clip.exe
-    print "Results copied to clip board"
+    aim-data $report open result.csv | select `Door Name` `Count`
+    `Week Of` `Common Cause` | to tsv | tail -n +2 | clip.exe print
+    "Results copied to clip board"
 
     if not $keep {
-        rm $report
-        rm result.csv
+        rm $report rm result.csv
     } else {
-        mv $report $"($today)-report.csv"
-        mv result.csv $"($today)-result.csv"
+        mv $report $"($today)-report.csv" mv result.csv
+        $"($today)-result.csv"
     }
 }
 
-# save epubs
+# save epubs 
 export def mv-epub [] {
     let count = glob ~/Downloads/*.epub | length
     if $count == 0 {
@@ -34,4 +33,23 @@ export def mv-epub [] {
     mv ~/Downloads/*.epub ~/Documents/EPUB/
 
     print $'Moved ($count) Ebooks!'
+}
+
+# open epub library 
+export def library [] {
+    if (which metapub | length) <= 0 {
+        error make {msg: 'metapub is not installed'}
+    }
+
+    let epubs = ls ~/Documents/EPUB | where type == file | get name
+    mut books = []
+
+    for e in $epubs {
+        $books = $books | append (metapub $e | parse "Title: {Title},
+      Path: {Path}")
+    }
+
+    $books | each {$"($in.Title), ($in.Path)"} | to text | fzf --delimiter
+    , --with-nth {1} --accept-nth {2} --preview 'epy --dump {2}' --bind
+    "enter:become(epy {2})"
 }
