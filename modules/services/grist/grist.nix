@@ -11,7 +11,6 @@
         entryPoints = [ "websecure" ];
         service = "grist";
         rule = "Host(`sheets.dragonslibrary.xyz`)";
-        tls.certResolver = "letsencrypt";
       };
     };
 

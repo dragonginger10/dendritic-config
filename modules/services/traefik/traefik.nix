@@ -50,6 +50,13 @@
         };
 
       };
+
+      dynamicConfigOptions.http = {
+        routers.wildcard = {
+          rule = "Host(`*.dragonslibrary.xyz`)";
+          tls.certResolver = "le";
+        };
+      };
     };
   };
 }
