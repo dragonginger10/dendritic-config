@@ -7,14 +7,14 @@
 
 python3Packages.buildPythonApplication (finalAttrs: {
   pname = "metapub";
-  version = "0.2.0";
+  version = "0.4.0";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "dragonginger10";
     repo = "metapub";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-WXcp6droPJuXzNeZdYOH4ZUo1iBRccPm/ThaNo6GVg4=";
+    hash = "sha256-ecnPgoCCtarrDGLivE6d1ms06tBtr3iGlJqBPwMeVUo=";
   };
 
   build-system = [
