@@ -14,6 +14,7 @@
         mpv
         calibre
         noctalia-shell
+        freenet
       ];
 
       programs = {
