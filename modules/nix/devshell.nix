@@ -14,6 +14,7 @@
           nh
           just
           nixd
+          nix-init
           statix
           home-manager
           jujutsu
