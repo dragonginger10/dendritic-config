@@ -14,6 +14,7 @@
           nh
           just
           nixd
+          nix-update
           nix-init
           statix
           home-manager
