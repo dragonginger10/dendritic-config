@@ -31,7 +31,7 @@ export def mv-epub [] {
         error make {msg: 'No Ebooks found!'}
     }
 
-    mv '~/Downloads/*.epub' '~/Documents/EPUB/'
+    mv ~/Downloads/*.epub ~/Documents/EPUB/
 
     print $'Moved ($count) Ebooks!'
 }
