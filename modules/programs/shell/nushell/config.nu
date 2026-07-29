@@ -41,15 +41,11 @@ export def library [] {
         error make {msg: 'metapub is not installed'}
     }
 
-    let epubs = ls ~/Documents/EPUB | where type == file | get name
-    mut books = []
+    let epubs = ls ~/Documents/EPUB/*.epub | get name | to text
+    let books = $epubs | metapub | from json
 
-    for e in $epubs {
-        $books = $books | append (metapub $e | parse "Title: {Title},
-      Path: {Path}")
-    }
-
-    $books | each {$"($in.Title), ($in.Path)"} | to text | fzf --delimiter
-    , --with-nth {1} --accept-nth {2} --preview 'epy --dump {2}' --bind
-    "enter:become(epy {2})"
+    $books
+    | par-each {$"($in.title), ($in.path)"}
+    | to text
+    | fzf --delimiter , --with-nth {1} --accept-nth {2} --preview 'epy --dump {2}' --bind "enter:become(epy {2})"
 }
