@@ -11,9 +11,14 @@ export def aim [--keep(-k)] {
         error make {msg: 'Aim-data not installed'}
     }
 
-    aim-data $report open result.csv | select `Door Name` `Count`
-    `Week Of` `Common Cause` | to tsv | tail -n +2 | clip.exe print
-    "Results copied to clip board"
+    aim-data $report
+    open result.csv
+    | select `Door Name` `Count` `Week Of` `Common Cause`
+    | to tsv
+    | tail -n +2
+    | clip.exe
+
+    print "Results copied to clip board"
 
     if not $keep {
         rm $report rm result.csv
@@ -41,8 +46,7 @@ export def library [] {
         error make {msg: 'metapub is not installed'}
     }
 
-    let epubs = ls ~/Documents/EPUB/*.epub | get name | to text
-    let books = $epubs | metapub | from json
+    let books = ls ~/Documents/EPUB/*.epub | get name | to text | metapub | from json
 
     $books
     | par-each {$"($in.title), ($in.path)"}
