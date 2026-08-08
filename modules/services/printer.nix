@@ -4,7 +4,10 @@
       system-config-printer
     ];
     services = {
-      printing.enable = true;
+      printing = {
+        enable = true;
+        drivers = with pkgs; [ cnijfilter2 ];
+      };
       avahi = {
         enable = true;
         nssmdns4 = true;
