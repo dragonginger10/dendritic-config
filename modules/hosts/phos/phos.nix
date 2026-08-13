@@ -31,6 +31,12 @@
         avahi
       ];
 
+      networking.firewall.allowedTCPPorts = [
+        4242
+        22
+        80
+      ];
+
       environment.systemPackages = with pkgs; [
         ani-cli
         deluge
