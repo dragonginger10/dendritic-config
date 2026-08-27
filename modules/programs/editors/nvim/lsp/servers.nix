@@ -7,6 +7,7 @@
     gopls.enable = true;
     lua_ls.enable = true;
     elixirls.enable = true;
+    texlab.enable = true;
 
     tinymist = {
       enable = true;
