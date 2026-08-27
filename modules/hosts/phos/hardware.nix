@@ -28,6 +28,10 @@
           device = "/dev/disk/by-label/GAMES";
           fsType = "ext4";
         };
+        "/TVvideos" = {
+          device = "/dev/disk/by-label/Television";
+          fsType = "ext4";
+        };
       };
 
       imports = [

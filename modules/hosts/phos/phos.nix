@@ -16,6 +16,7 @@
         overlays = [ self.overlays.default ];
       };
       age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsuTYhZ1XsXb+d/Pyph7RpkPYnE3R4xV9Usl5aH6Ood dragon@phos";
+
       imports = with self.modules.nixos; [
         base
         nix
@@ -31,19 +32,24 @@
         avahi
       ];
 
-      networking.firewall.allowedTCPPorts = [
-        4242
-        22
-        80
-      ];
+      networking.firewall.enable = false;
+      networking.networkmanager = {
+        enable = true;
+        plugins = with pkgs; [
+          networkmanager-openvpn
+        ];
+      };
 
       environment.systemPackages = with pkgs; [
         ani-cli
-        deluge
+        qbittorrent
         openhue-cli
         wtwitch
         twitch-tui
         nyaa
+        proton-vpn
+        protonmail-desktop
+        gparted
       ];
 
       security.sudo.wheelNeedsPassword = false;
