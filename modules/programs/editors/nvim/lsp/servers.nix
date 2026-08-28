@@ -22,7 +22,7 @@
         nixpkgs.expr = "import <nixpkgs> { }";
         formatting.command = "nixfmt";
         options = {
-          nixos.expr = "(builtins.getFlake (toString ./.)).nixosConfiguration.wsl.options";
+          nixos.expr = "(builtins.getFlake (toString ./.)).nixosConfiguration.phos.options";
         };
       };
     };
