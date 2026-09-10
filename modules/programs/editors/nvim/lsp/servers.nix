@@ -4,6 +4,7 @@
     just.enable = true;
     bashls.enable = true;
     ruff.enable = true;
+    pylsp.enable = true;
     gopls.enable = true;
     lua_ls.enable = true;
     elixirls.enable = true;
