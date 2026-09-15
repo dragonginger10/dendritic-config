@@ -21,7 +21,6 @@
       };
 
       config = {
-        v2-settings = true;
         settings =
           let
             inherit (lib) getExe;

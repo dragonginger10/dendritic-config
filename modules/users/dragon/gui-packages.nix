@@ -1,6 +1,7 @@
 {
   nixpkgs.allowedUnfreePackages = [
     "discord"
+    "discord-unwrapped"
   ];
 
   flake.modules.homeManager.gui =
@@ -15,7 +16,7 @@
         mpv
         calibre
         noctalia-shell
-        freenet
+
       ];
 
       programs = {
