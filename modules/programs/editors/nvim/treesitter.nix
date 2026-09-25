@@ -17,6 +17,7 @@
             lua
             nu
             typst
+            python
           ];
         };
       };

@@ -3,35 +3,32 @@
   flake.modules.nixvim.base.lsp.keymaps = [
 
     {
-      key = "gd";
+      key = "<leader>gd";
       lspBufAction = "definition";
+      options.desc = "go to definition";
     }
     {
-      key = "gD";
+      key = "<leader>gD";
       lspBufAction = "references";
+      options.desc = "go to references";
     }
     {
-      key = "gt";
-      lspBufAction = "type_definition";
-    }
-    {
-      key = "gr";
+      key = "<leader>gr";
       lspBufAction = "rename";
+      options.desc = "rename symbol";
     }
     {
-      key = "K";
-      lspBufAction = "hover";
-    }
-    {
-      key = "ga";
+      key = "<leader>ga";
       lspBufAction = "code_action";
+      options.desc = "code actions";
     }
     {
       key = "<leader>gf";
       lspBufAction = "format";
+      options.desc = "lsp format";
     }
     {
-      key = "<leader>ht";
+      key = "<leader>gh";
       action = inputs.nixvim.lib.nixvim.mkRaw ''
         function()
           vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
