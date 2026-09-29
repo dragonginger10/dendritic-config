@@ -9,6 +9,7 @@
     lua_ls.enable = true;
     elixirls.enable = true;
     texlab.enable = true;
+    ty.enable = true;
 
     tinymist = {
       enable = true;
