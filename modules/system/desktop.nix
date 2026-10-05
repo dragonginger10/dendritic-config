@@ -11,6 +11,7 @@
         imports = with self.modules.nixos; [
           stylix
           fonts
+          flatpaks
         ];
 
         home-manager.users.${username}.imports = with self.modules.homeManager; [
@@ -35,7 +36,6 @@
         };
 
         services = {
-          flatpak.enable = true;
           udev.packages = [
             pkgs.vial
           ];

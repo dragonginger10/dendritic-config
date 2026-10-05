@@ -9,7 +9,7 @@
         folders = {
           EPUB = {
             id = "hye6a-atsqh";
-            path = "/home/dragon/Documents/epub";
+            path = "/home/dragon/Documents/EPUB";
             devices = [ "phone" ];
           };
         };

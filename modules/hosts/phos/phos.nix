@@ -50,7 +50,12 @@
         proton-vpn
         protonmail-desktop
         gparted
+        yt-dlp
       ];
+
+      programs = {
+        localsend.enable = true;
+      };
 
       security.sudo.wheelNeedsPassword = false;
 
