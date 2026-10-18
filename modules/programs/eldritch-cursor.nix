@@ -1,6 +1,6 @@
 {
   flake-file.inputs.eldritch-cursors = {
-    url = "github:eldritch-theme/cursorss";
+    url = "github:eldritch-theme/cursors";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
