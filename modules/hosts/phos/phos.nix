@@ -30,6 +30,7 @@
         syncthing
         secrets
         avahi
+        eldritch-cursors
       ];
 
       networking.firewall.enable = false;
