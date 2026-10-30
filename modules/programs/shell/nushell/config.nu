@@ -41,16 +41,16 @@ export def mv-epub [] {
     print $'Moved ($count) Ebooks!'
 }
 
-# open epub library 
-export def library [] {
-    if (which metapub | length) <= 0 {
-        error make {msg: 'metapub is not installed'}
-    }
-
-    let books = ls ~/Documents/EPUB/*.epub | get name | to text | metapub | from json
-
-    $books
-    | par-each {$"($in.title), ($in.path)"}
-    | to text
-    | fzf --delimiter , --with-nth {1} --accept-nth {2} --preview 'epy --dump {2}' --bind "enter:become(epy {2})"
-}
+# # open epub library 
+# export def library [] {
+#     if (which metapub | length) <= 0 {
+#         error make {msg: 'metapub is not installed'}
+#     }
+#
+#     let books = ls ~/Documents/EPUB/*.epub | get name | to text | metapub | from json
+#
+#     $books
+#     | par-each {$"($in.title), ($in.path)"}
+#     | to text
+#     | fzf --delimiter , --with-nth {1} --accept-nth {2} --preview 'epy --dump {2}' --bind "enter:become(epy {2})"
+# }
