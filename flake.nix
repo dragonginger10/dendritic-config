@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     eldritch-cursors = {
-      url = "github:eldritch-theme/cursorss";
+      url = "github:eldritch-theme/cursors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-file.url = "github:denful/flake-file";

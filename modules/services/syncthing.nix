@@ -7,10 +7,18 @@
       dataDir = "/home/dragon/Documents/sync";
       settings = {
         folders = {
+          Projects = {
+            id = "my-projects-dir";
+            path = "/home/dragon/Documents/Projects";
+            devices = [ "work" ];
+          };
           EPUB = {
             id = "hye6a-atsqh";
             path = "/home/dragon/Documents/EPUB";
-            devices = [ "phone" ];
+            devices = [
+              "phone"
+              "work"
+            ];
           };
         };
         devices = {
