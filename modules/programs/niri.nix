@@ -38,7 +38,7 @@
             };
             layer-rules = [
               {
-                matches = [ { namespace = "^noctalia-overview"; } ];
+                matches = [ { namespace = "^noctalia-wallpaper"; } ];
                 place-within-backdrop = true;
               }
             ];
@@ -83,7 +83,7 @@
               }
             ];
             spawn-at-startup = with pkgs; [
-              "noctalia-shell"
+              "noctalia"
               "xwayland-satellite"
             ];
             input.keyboard = {
@@ -105,9 +105,8 @@
                 noctalia =
                   cmd:
                   [
-                    "noctalia-shell"
-                    "ipc"
-                    "call"
+                    "noctalia"
+                    "msg"
                   ]
                   ++ (lib.splitString " " cmd);
                 mkMenu = self.lib.mkWhichKeyExe config.pkgs;
@@ -135,12 +134,12 @@
                 "Mod+Shift+M".move-workspace-to-monitor-next = _: { };
 
                 "Mod+Ctrl+L" = {
-                  spawn = noctalia "lockScreen lock";
+                  spawn = noctalia "session lock";
                 };
                 "Mod+E" = {
                   spawn = "${getExe pkgs.cosmic-files}";
                 };
-                "Mod+R".spawn = noctalia "launcher toggle";
+                "Mod+R".spawn = noctalia "panel-open launcher";
 
                 "Mod+d".spawn-sh =
                   let

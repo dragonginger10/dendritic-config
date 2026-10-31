@@ -50,6 +50,7 @@
         nyaa
         proton-vpn
         protonmail-desktop
+        proton-pass
         gparted
         yt-dlp
       ];

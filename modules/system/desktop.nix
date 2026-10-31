@@ -23,7 +23,7 @@
           selfpkgs.antra
           selfpkgs.grist-desktop
           gpu-screen-recorder-gtk
-          noctalia-shell
+          noctalia
           xwayland-satellite
         ];
 

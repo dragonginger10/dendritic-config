@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake-file.inputs.eldritch-cursors = {
     url = "github:eldritch-theme/cursors";
@@ -5,13 +6,16 @@
   };
 
   flake.modules.nixos.eldritch-cursors =
-    { self', ... }:
+    { pkgs, ... }:
+    let
+      selfpkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
+    in
     {
-      environment.systemPkgs = [ self'.packages.eldritch-cursors ];
+      environment.systemPackages = [ selfpkgs.eldritch-cursors ];
 
       stylix.cursor = {
-        name = "Eldritch Cthulhu Great Old One Green";
-        package = self'.packages.eldritch-cursors.great-old-green;
+        name = "eldritch-great-old-green-cursors";
+        package = selfpkgs.eldritch-cursors;
         size = 32;
       };
     };
@@ -19,6 +23,6 @@
   perSystem =
     { inputs', ... }:
     {
-      packages.eldritch-cursors = inputs'.eldritch-cursors.packages.default;
+      packages.eldritch-cursors = inputs'.eldritch-cursors.packages.great-old-green;
     };
 }

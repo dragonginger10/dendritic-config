@@ -15,8 +15,7 @@
         discover-overlay
         mpv
         calibre
-        noctalia-shell
-
+        noctalia
       ];
 
       programs = {
