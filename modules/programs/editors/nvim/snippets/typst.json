@@ -1,0 +1,6 @@
+"flower": {
+	"prefix": "flwr",
+	"body": [
+		"#flower('$1', '$2')[$3]"
+	],
+}

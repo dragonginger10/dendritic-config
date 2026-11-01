@@ -4,6 +4,7 @@
     direnv.enable = true;
     dropbar.enable = true;
     harpoon.enable = true;
+    friendly-snippets.enable = true;
     hop.enable = true;
     intellitab.enable = true;
     lazygit.enable = true;
