@@ -41,6 +41,7 @@
         ];
       };
 
+      environment.localBinInPath = true;
       environment.systemPackages = with pkgs; [
         ani-cli
         qbittorrent
@@ -57,6 +58,7 @@
 
       programs = {
         localsend.enable = true;
+        nix-ld.enable = true;
       };
 
       security.sudo.wheelNeedsPassword = false;

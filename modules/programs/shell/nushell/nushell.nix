@@ -69,6 +69,10 @@
 
       programs.nushell = {
         enable = true;
+
+        extraEnv = ''
+          $env.PATH ++= [ '~/.local/bin' ]
+        '';
         configFile.source = ./config.nu;
         plugins = with pkgs.nushellPlugins; [
         ];

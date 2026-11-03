@@ -23,7 +23,6 @@ stdenv.mkDerivation (finalAttrs: {
   meta = {
     description = "Make use of your old phone || Your own Desk Buddy";
     homepage = "https://github.com/typewriter03/Desko";
-    license = lib.licenses.unfree; # FIXME: nix-init did not find a license
     maintainers = with lib.maintainers; [ ];
     mainProgram = "desko";
     platforms = lib.platforms.all;
