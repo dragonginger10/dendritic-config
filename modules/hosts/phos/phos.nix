@@ -31,6 +31,7 @@
         secrets
         avahi
         eldritch-cursors
+        wbtv
       ];
 
       networking.firewall.enable = false;
