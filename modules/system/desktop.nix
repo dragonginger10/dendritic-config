@@ -25,6 +25,7 @@
           gpu-screen-recorder-gtk
           noctalia
           xwayland-satellite
+          mpvpaper
         ];
 
         programs = {

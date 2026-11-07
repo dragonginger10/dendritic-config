@@ -15,11 +15,9 @@
         discover-overlay
         mpv
         calibre
-        noctalia
       ];
 
       programs = {
-        discord.enable = true;
         spotify-player.enable = true;
         ghostty = {
           enable = true;

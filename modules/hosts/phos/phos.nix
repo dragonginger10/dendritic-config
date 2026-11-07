@@ -53,14 +53,11 @@
         proton-vpn
         protonmail-desktop
         proton-pass
-        gparted
         yt-dlp
       ];
 
-      programs = {
-        localsend.enable = true;
-        nix-ld.enable = true;
-      };
+      # programs = {
+      # };
 
       security.sudo.wheelNeedsPassword = false;
 
