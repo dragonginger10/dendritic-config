@@ -7,13 +7,13 @@
     services = {
       traefik.dynamicConfigOptions.http = {
         services.paperless.loadBalancer.servers = [
-          { url = "http://localhost:${toString config.serves.paperless.port}"; }
+          { url = "http://localhost:${toString config.services.paperless.port}"; }
         ];
-        routers.paperlss = {
+        routers.paperless = {
           entryPoints = [ "websecure" ];
           service = "paperless";
           rule = "Host(`docs.dragonslibrary.xyz`)";
-          tls.certResolver = "letsencrypt";
+          tls.certResolver = "le";
         };
       };
 

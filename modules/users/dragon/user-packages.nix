@@ -4,6 +4,7 @@
     {
       home.packages = with pkgs; [
         russ
+        tdf
         epy
         glow
         sc-im

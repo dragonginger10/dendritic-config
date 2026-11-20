@@ -56,8 +56,10 @@
         yt-dlp
       ];
 
-      # programs = {
-      # };
+      programs = {
+        fuse.enable = true;
+        nix-ld.enable = true;
+      };
 
       security.sudo.wheelNeedsPassword = false;
 
