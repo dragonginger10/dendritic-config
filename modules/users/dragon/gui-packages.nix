@@ -14,11 +14,11 @@
         nautilus
         discover-overlay
         mpv
+        spotatui
         calibre
       ];
 
       programs = {
-        spotify-player.enable = true;
         ghostty = {
           enable = true;
           settings = {
