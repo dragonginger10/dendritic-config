@@ -64,6 +64,7 @@
 
       programs.nushell = {
         enable = true;
+        loadSessionVariables = true;
 
         extraEnv = ''
           $env.PATH ++= [ '~/.local/bin' ]
