@@ -19,6 +19,7 @@
         displayManager
         niri
         eldritch-cursors
+        wallpaperengine
 
         dev
         gaming

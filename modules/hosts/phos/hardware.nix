@@ -38,6 +38,9 @@
         (modulesPath + "/installer/scan/not-detected.nix")
       ];
 
+      # Steam library lives on the /games drive.
+      preferences.steam.library = "/games/SteamLibrary";
+
       boot = {
         initrd.availableKernelModules = [
           "xhci_pci"
