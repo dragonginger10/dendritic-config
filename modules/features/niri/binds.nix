@@ -21,6 +21,11 @@
         # apps
         "Mod+Return".spawn = getExe config.preferences.niri.terminal;
         "Mod+E".spawn = getExe pkgs.cosmic-files;
+        "Mod+Shift+Escape".spawn = [
+          (getExe config.preferences.niri.terminal)
+          "-e"
+          "btop"
+        ];
 
         # session / overlays
         "Mod+Shift+E".quit = _: { props.skip-confirmation = true; };
