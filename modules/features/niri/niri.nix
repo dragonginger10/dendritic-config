@@ -4,8 +4,28 @@
   ...
 }:
 {
-
+  # Niri window manager + noctalia shell.
   flake.modules.nixos.niri =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = with pkgs; [
+        gpu-screen-recorder-gtk
+        noctalia
+        xwayland-satellite
+        mpvpaper
+      ];
+
+      programs = {
+        gpu-screen-recorder.enable = true;
+        niri = {
+          enable = true;
+          package = pkgs.local.niri;
+        };
+      };
+    };
+
+  # niri settings, consumed by the nix-wrapper-modules niri wrapper below.
+  flake.modules.wrapper.niri =
     {
       config,
       pkgs,
@@ -253,7 +273,7 @@
       packages.niri = inputs.wrappers.wrappers.niri.wrap {
         inherit pkgs;
         imports = [
-          self.modules.nixos.niri
+          self.modules.wrapper.niri
         ];
       };
     };

@@ -17,10 +17,10 @@
         inputs.nixos-wsl.nixosModules.wsl
 
         base
-        nix
         stylix
         determinate
         dragon
+        dev
         secrets
       ];
 
@@ -35,9 +35,6 @@
           ];
         };
       };
-
-      programs.nix-ld.enable = true;
-      environment.localBinInPath = true;
 
       system.stateVersion = "25.11";
     };

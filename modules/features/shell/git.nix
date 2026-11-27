@@ -32,10 +32,10 @@
         diff = {
           context = 3;
           renames = "copies";
-          interHunContext = 10;
+          interHunkContext = 10;
         };
         push = {
-          autotupRemote = true;
+          autoSetupRemote = true;
           default = "current";
           followTags = true;
         };
@@ -48,7 +48,7 @@
           missingCommitsCheck = "warn";
         };
         log = {
-          abrevCommit = true;
+          abbrevCommit = true;
         };
       };
     };

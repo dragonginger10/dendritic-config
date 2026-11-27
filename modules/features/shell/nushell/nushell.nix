@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   flake.modules.homeManager.nushell =
     {
@@ -51,14 +50,10 @@
 
       programs = {
         carapace.enable = true;
-        starship =
-          let
-            tomlPath = self.packages.${pkgs.stdenv.hostPlatform.system}.eldritch-starship;
-          in
-          {
-            enable = true;
-            settings = fromTOML (readFile "${tomlPath}/config.toml");
-          };
+        starship = {
+          enable = true;
+          settings = fromTOML (readFile "${pkgs.local.eldritch-starship}/config.toml");
+        };
         zoxide.enable = true;
 
         direnv = {

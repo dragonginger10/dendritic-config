@@ -16,10 +16,6 @@ in
           agenix
           environment
           editors
-          home-manager
-        ];
-        home-manager.users.${username}.imports = [
-          self.modules.homeManager.${username}
         ];
       };
     }

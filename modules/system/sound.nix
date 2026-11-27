@@ -2,7 +2,7 @@
   flake.modules.nixos.sound = {
     services.pipewire = {
       alsa.enable = true;
-      alsa.support32bit = true;
+      alsa.support32Bit = true;
       pulse.enable = true;
       enable = true;
     };

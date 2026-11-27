@@ -1,47 +1,31 @@
-{
-  self,
-  ...
-}:
+{ self, ... }:
 {
   nixosHosts.wonderland.enable = true;
-  nixpkgs.allowedUnfreePackages = [
-    "slack"
-  ];
 
   flake.modules.nixos."confs/wonderland" =
-    { pkgs, lib, ... }:
+    { lib, ... }:
     {
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       imports = with self.modules.nixos; [
         base
-        nix
+        determinate
         dragon
         desktop
-        determinate
+        work
       ];
 
       boot.loader.systemd-boot.enable = true;
-
-      environment.systemPackages = with pkgs; [
-        slack
-        opencode
-      ];
 
       services = {
         displayManager = {
           enable = true;
           cosmic-greeter.enable = true;
         };
-        desktopManager = {
-          cosmic.enable = true;
-        };
+        desktopManager.cosmic.enable = true;
       };
-
-      programs.niri.enable = lib.mkForce false;
 
       security.sudo.wheelNeedsPassword = false;
 
       system.stateVersion = "25.11";
-
     };
 }

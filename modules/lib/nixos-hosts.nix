@@ -22,7 +22,8 @@ in
           };
           stable = mkOption {
             type = bool;
-            default = true;
+            default = false;
+            description = "Build this host from nixpkgs-stable instead of nixpkgs.";
           };
           additionalModules = mkOption {
             type = listOf attrs;
@@ -39,7 +40,7 @@ in
       mkHost =
         hostname: options:
         let
-          nixpkgs' = if options.stable then inputs.nixpkgs else inputs.nixpkgs-stable;
+          nixpkgs' = if options.stable then inputs.nixpkgs-stable else inputs.nixpkgs;
         in
         if options.enable then
           (nixpkgs'.lib.nixosSystem {

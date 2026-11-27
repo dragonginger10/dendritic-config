@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   flake.modules.nixos.editors =
     {
@@ -9,8 +8,7 @@
     }:
     let
       alts = config.preferences.editors.alternatives.enable;
-      selfpkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
-      themed-nvim = selfpkgs.neovim.extend config.stylix.targets.nixvim.exportedModule;
+      themed-nvim = pkgs.local.neovim.extend config.stylix.targets.nixvim.exportedModule;
     in
     {
       options.preferences.editors = {
@@ -25,7 +23,7 @@
           ]
           ++ lib.optionals alts [
             evil-helix
-            selfpkgs.micro
+            local.micro
           ];
       };
     };

@@ -1,8 +1,15 @@
-{ withSystem, ... }:
+{ config, withSystem, ... }:
+let
+  overlays = [ config.flake.overlays.default ];
+in
 {
   flake.overlays.default = _final: prev: {
     local = withSystem prev.stdenv.hostPlatform.system ({ config, ... }: config.packages);
     btop = prev.btop.override { rocmSupport = true; };
-    notonoto = _final.local.notonoto;
+  };
+
+  flake.modules = {
+    nixos.nix.nixpkgs = { inherit overlays; };
+    homeManager.nix.nixpkgs = { inherit overlays; };
   };
 }

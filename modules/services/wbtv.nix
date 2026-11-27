@@ -15,7 +15,7 @@
       image = "wb20244/wbtv:latest";
       ports = [ "8420:8080" ];
       volumes = [
-        "/home/dragon/.config/wbtv:/config"
+        "${config.users.users.${config.preferences.user.name}.home}/.config/wbtv:/config"
         "/TVvideos:/media:ro"
       ];
       environment = {

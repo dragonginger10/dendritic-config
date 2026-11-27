@@ -31,19 +31,46 @@ Commits automatically run: `nixfmt` (formatter), `statix` (linter), `nufmt` (Nus
 
 This repo uses [flake-parts](https://flake.parts) + [import-tree](https://github.com/vic/import-tree): **every `.nix` file under `modules/` is automatically imported as its own flake-parts module**. There is no explicit import list to maintain — adding a file is sufficient.
 
+### Layout
+
+Files under `modules/` are grouped by **feature** rather than by kind:
+
+| Dir | Contents |
+|-----|----------|
+| `nix/` | Flake infrastructure (inputs, overlays, formatter, hooks, agenix) |
+| `lib/` | Custom flake options/helpers (`nixosHosts`, `homeConfigs`, `self.lib.user`, preferences) |
+| `system/` | Core NixOS pieces: `base` (locale, activation, nix settings, unfree), `boot`, `sound`, `vm`, `stylix`, `fonts` |
+| `features/<f>/` | `shell`, `editors`, `desktop`, `niri`, `gaming`, `dev`, `media`, `proton`, `work`, `printing`, `virt` |
+| `services/` | `syncthing`, `wbtv`; `services/server/` holds homelab/server services (traefik, paperless, grist, …) |
+| `hosts/<h>/` | Host definition + hardware |
+| `users/<u>/` | User account + the user's HM entry module |
+| `secrets/` | Shared agenix secrets |
+
+Files/dirs whose path contains `/_` are skipped by import-tree. Use this for WIP modules (e.g. `features/dev/_comfyui.nix`).
+
+### Conventions
+
+1. **One feature, one place.** A feature file declares everything it needs: `flake-file.inputs.*`, `nixpkgs.allowedUnfreePackages`, `perSystem.packages.*`, `flake.modules.nixos.<f>`, `flake.modules.homeManager.<f>`.
+2. **System vs user packages.** NixOS modules hold services, drivers, udev, `programs.<x>.enable` that need system integration (steam, niri, nix-ld), and the minimal `basics` toolset. User apps and CLI tools go in HM, preferring `programs.<x>.enable` over `home.packages`. A NixOS feature with user-side parts pulls them in via `home-manager.users.${config.preferences.user.name}.imports = [ self.modules.homeManager.<f> ]` (see `features/media/media.nix`).
+3. **Custom/flake-input packages** are exposed through `perSystem.packages` or `packages/` and consumed as `pkgs.local.<name>`. The overlay is applied by the shared `nix` module on every host and in standalone HM. Don't use `self.packages.${system}`.
+4. **Services own their whole surface:** secret (`.age` beside the module), firewall ports, Traefik router, user groups. `services/server/paperless/` is the reference.
+5. **Hosts only contain** hardware, networking, host keys, `stateVersion`, and the feature `imports` list. No package lists.
+6. Never hardcode the username or home path; use `config.preferences.user.name` / `config.users.users.<u>.home`.
+
 ### Module Namespaces
 
 Modules contribute to three namespaces under `flake.modules.*`:
 - `flake.modules.nixos.<name>` — NixOS modules
 - `flake.modules.homeManager.<name>` — Home-Manager modules
 - `flake.modules.generic.<name>` — shared modules (e.g. `constants` from `preferences.nix`)
+- `flake.modules.wrapper.<name>` — nix-wrapper-modules configs (e.g. `niri` settings used to build `pkgs.local.niri`)
 
 ### Key Library Modules (`modules/lib/`)
 
-- **`nixos-hosts.nix`** — defines the `nixosHosts` option. Set `nixosHosts.<name>.enable = true` in a host file and point `flake.modules.nixos."confs/<name>"` to the host's NixOS module. Options: `system` (default `x86_64-linux`), `stable` (bool), `additionalModules`.
+- **`nixos-hosts.nix`** — defines the `nixosHosts` option. Set `nixosHosts.<name>.enable = true` in a host file and point `flake.modules.nixos."confs/<name>"` to the host's NixOS module. Options: `system` (default `x86_64-linux`), `stable` (default `false`; `true` builds from `nixpkgs-stable`), `additionalModules`.
 - **`home-configs.nix`** — defines the `homeConfigs` option. Set `homeConfigs.<username>.enable = true`. Automatically wires stylix, the shared nix module, and `flake.modules.homeManager.<username>`.
-- **`users.nix`** — provides `self.lib.user <username> <isAdmin>` which returns the NixOS user definition (creates the user account and hooks `home-manager.users.<username>` into `self.modules.homeManager.<username>`).
-- **`preferences.nix`** — defines `options.preferences` with `user.name` (default `"dragon"`) and `theme` (default `"eldritch"`). Import `self.modules.generic.constants` in any NixOS module to access these options.
+- **`users.nix`** — provides `self.lib.user <username> <isAdmin>` which returns the NixOS user definition (creates the user account; if `flake.modules.homeManager.<username>` exists, imports the home-manager NixOS module and wires `home-manager.users.<username>` to it).
+- **`preferences.nix`** — defines `options.preferences` with `user.name` (default `"dragon"`) and `theme` (default `"eldritch"`). `base` imports it; any other module may import `self.modules.generic.constants` too (it has a fixed `key`, so duplicate imports are deduped).
 
 ### Host Definition Pattern (`modules/hosts/<name>/<name>.nix`)
 
@@ -52,7 +79,7 @@ Modules contribute to three namespaces under `flake.modules.*`:
   nixosHosts.<name>.enable = true;
 
   flake.modules.nixos."confs/<name>" = { pkgs, lib, ... }: {
-    imports = with self.modules.nixos; [ base nix boot dragon ... ];
+    imports = with self.modules.nixos; [ base boot dragon desktop niri ... ];  # features only
     system.stateVersion = "25.11";
   };
 }
@@ -67,7 +94,7 @@ Modules contribute to three namespaces under `flake.modules.*`:
   flake.modules = lib.mkMerge [
     (self.lib.user <username> true)  # creates user account + HM wiring
     {
-      nixos.<username>.imports = with self.modules.nixos; [ environment editors home-manager ];
+      nixos.<username>.imports = with self.modules.nixos; [ environment editors ];
     }
     {
       homeManager.<username> = {
@@ -91,7 +118,7 @@ Packages live in `packages/<name>.nix` and are loaded via [pkgs-by-name](https:/
 | `systems.nix` | Sets `systems = [ "x86_64-linux" "aarch64-linux" ]` |
 | `treefmt.nix` | Configures nixfmt as the formatter |
 | `git-hooks.nix` | Configures nixfmt + statix + nufmt pre-commit hooks |
-| `overlays.nix` | Default overlay: exposes `pkgs.local.*` and overrides btop with ROCm |
+| `overlays.nix` | Default overlay (`pkgs.local.*`, btop with ROCm); applied via the shared `nix` NixOS/HM modules |
 | `pkgs-by-name.nix` | Loads `packages/` directory via pkgs-by-name |
 | `wrapper-modules.nix` | Imports nix-wrapper-modules |
 | `schemas/` | Exposes DeterminateSystems flake schemas |
@@ -104,3 +131,4 @@ Packages live in `packages/<name>.nix` and are loaded via [pkgs-by-name](https:/
 | `wonderland` | Laptop — COSMIC, Slack, no gaming |
 | `mini` | VM — LXQT/LightDM, minimal, for testing |
 | `wsl` | NixOS-WSL, headless |
+| `hoseki` | Linode VPS (terranix) — traefik, paperless, filebrowser, fail2ban |

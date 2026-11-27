@@ -8,7 +8,7 @@
         fira-code
         fira-code-symbols
         noto-fonts-cjk-serif
-        notonoto
+        local.notonoto
       ];
     };
 }

@@ -1,6 +1,6 @@
-{
-  flake.modules.generic.constants =
-    { config, lib, ... }:
+let
+  preferences =
+    { lib, ... }:
     let
       inherit (lib) mkOption types;
     in
@@ -26,4 +26,13 @@
         };
       };
     };
+in
+{
+  # `key` makes the module system dedupe this, so any module may import it.
+  flake.modules.generic.constants.imports = [
+    {
+      key = "dendritic#generic.constants";
+      imports = [ preferences ];
+    }
+  ];
 }

@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   flake-file.inputs.eldritch-cursors = {
     url = "github:eldritch-theme/cursors";
@@ -7,15 +6,12 @@
 
   flake.modules.nixos.eldritch-cursors =
     { pkgs, ... }:
-    let
-      selfpkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
-    in
     {
-      environment.systemPackages = [ selfpkgs.eldritch-cursors ];
+      environment.systemPackages = [ pkgs.local.eldritch-cursors ];
 
       stylix.cursor = {
         name = "eldritch-great-old-green-cursors";
-        package = selfpkgs.eldritch-cursors;
+        package = pkgs.local.eldritch-cursors;
         size = 32;
       };
     };

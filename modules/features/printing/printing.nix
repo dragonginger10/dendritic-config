@@ -2,7 +2,7 @@
   nixpkgs.allowedUnfreePackages = [
     "cnijfilter2"
   ];
-  flake.modules.nixos.avahi = { pkgs, ... }: {
+  flake.modules.nixos.printing = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       system-config-printer
     ];

@@ -9,7 +9,6 @@
     }:
     {
       imports = with self.modules.nixos; [
-        nix
         boot
         base
         dragon

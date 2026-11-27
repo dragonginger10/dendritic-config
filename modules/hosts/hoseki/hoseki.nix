@@ -1,14 +1,17 @@
 { self, ... }: {
   nixosHosts.hoseki.enable = true;
-  flake.modules.nixos."confs/hoseki" = { config, pkgs, ... }: {
+  flake.modules.nixos."confs/hoseki" = {
     imports = with self.modules.nixos; [
       base
-      nix
       cinnabar
-      ssh
       agenix
+      server-tools
+
+      ssh
+      jailtime
       traefik
       paperless
+      file
     ];
 
     age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJy5D93Si0kwEHZ8krIPAMK6hB/FrSbigtCLDWe4Fjm5 cinnabar@nixos";
@@ -18,13 +21,6 @@
       usePredictableInterfaceNames = false;
       interfaces.eth0.useDHCP = true;
     };
-
-    environment.systemPackages = with pkgs; [
-      mtr
-      sysstat
-      inetutils
-      lazydocker
-    ];
 
     users.users.cinnabar = {
       openssh.authorizedKeys.keys = [
