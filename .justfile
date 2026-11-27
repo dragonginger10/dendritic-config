@@ -63,6 +63,7 @@ bootstrap target :
 image target:
     nh os build-image --image-variant sd-card --hostname {{ target }}
 
+# If activation fails (e.g. `systemd-run: unrecognized option`), finish with `just activate`.
 # deploy to a host, requires username and password
 deploy target user ip:
     echo -e "\n=> Deploying to {{target}}"
@@ -70,3 +71,13 @@ deploy target user ip:
         --hostname {{target}} \
         --target-host {{user}}@{{ip}} \
         --build-host {{user}}@{{ip}} 
+
+# Use when the remote's systemd is older than the local nh expects (e.g. a fresh base image).
+# activate a system already built on a remote host, bypassing nh/systemd-run
+activate target user ip:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    p=$(nix eval --raw ".#nixosConfigurations.{{ target }}.config.system.build.toplevel")
+    echo -e "\n=> Activating $p on {{ target }}"
+    ssh -t {{ user }}@{{ ip }} "test -e $p || { echo 'not built on {{ target }} yet: run just deploy first' >&2; exit 1; }; \
+        sudo nix-env -p /nix/var/nix/profiles/system --set $p && sudo $p/bin/switch-to-configuration switch"
