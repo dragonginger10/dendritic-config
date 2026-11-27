@@ -9,10 +9,10 @@
 
 let
   pname = "antra";
-  version = "1.1.6";
+  version = "2.0.0";
   src = fetchurl {
     url = "https://github.com/anandprtp/Antra/releases/download/v${version}/Antra-Linux.AppImage";
-    hash = "sha256-ZhxNsG5AM584rCVONlxsortDdjLMFmJO79z8Kurhh2Q=";
+    hash = "sha256-0Mgro92rmaFdOZ4sq58q8/SGUxPUAwIYDlpVoFnqSro=";
   };
 
   wrapped = appimageTools.wrapType2 {
@@ -29,8 +29,9 @@ let
     mkdir -p $out/share/icons/hicolor/128x128/apps
     cp ${
       fetchurl {
-        url = "https://raw.githubusercontent.com/anandprtp/Antra/refs/heads/main/antra-wails/build/appicon.png";
-        hash = "sha256-3I+X3Q7M+lrdDD2fps2vOZ8GDNzln8vQBv7D8nvaw6s=";
+        # pinned to the release tag; `main` changes and breaks the hash
+        url = "https://raw.githubusercontent.com/anandprtp/Antra/v${version}/antra-wails/build/appicon.png";
+        hash = "sha256-myj+ZQvDNQL21QcAOAT4ODWz6seZnXeRWTHHsX7MMkE=";
       }
     } $out/share/icons/hicolor/128x128/apps/${pname}.png
   '';
