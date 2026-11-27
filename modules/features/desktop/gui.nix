@@ -1,8 +1,12 @@
 {
-  nixpkgs.allowedUnfreePackages = [
-    "discord"
-    "discord-unwrapped"
-  ];
+  flake.modules.wrapper.niri =
+    { lib, pkgs, ... }:
+    {
+      menus."Mod+d".m = {
+        desc = "mattermost";
+        cmd = lib.getExe pkgs.mattermost-desktop;
+      };
+    };
 
   flake.modules.homeManager.gui =
     { pkgs, ... }:
@@ -12,7 +16,6 @@
         mupdf
         feh
         nautilus
-        discover-overlay
         mpv
         spotatui
         calibre

@@ -10,4 +10,8 @@
       packages.zen-browser = inputs'.zen.packages.default;
     };
 
+  flake.modules.wrapper.niri.menus."Mod+d".b = {
+    desc = "browser";
+    cmd = "zen";
+  };
 }
