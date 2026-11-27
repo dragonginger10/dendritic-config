@@ -22,7 +22,7 @@ export def main [
         $host
     }
     let rows = (
-    ^nix eval --json $"($flake)#lib.packageReports.($host)" --quiet
+    ^nix eval --json $"($flake)#lib.packageReportFor" --apply $"f: f \"($host)\"" --quiet
     | from json
     | where {|r| ($scope == null) or ($r.scope == $scope) }
   )

@@ -5,7 +5,6 @@ let
     concatMap
     findFirst
     hasPrefix
-    mapAttrs
     mapAttrsToList
     removeSuffix
     splitString
@@ -158,10 +157,11 @@ let
     );
 in
 {
-  # `nix eval --json .#lib.packageReports.<host>` -> [ { name version scope tier from } ]
+  # nix eval --json .#lib.packageReportFor --apply 'f: f "<host>"' -> [ { name version scope tier from } ]
+  # (functions only: the `lib` flake schema rejects non-function values)
   # tier: explicit (listed in this repo) | enabled (upstream module enabled by this repo) | implicit
   flake.lib = {
     inherit packageReport;
-    packageReports = mapAttrs (_: packageReport) self.nixosConfigurations;
+    packageReportFor = host: packageReport self.nixosConfigurations.${host};
   };
 }
