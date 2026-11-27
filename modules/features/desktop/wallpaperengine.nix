@@ -25,7 +25,12 @@
       };
 
     homeManager.wallpaperengine =
-      { config, lib, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       let
         cfg = config.services.linux-wallpaperengine;
         workshop = config.wallpaperengine.workshopDir;
@@ -42,6 +47,8 @@
         config.services.linux-wallpaperengine = {
           # Stays off until at least one wallpaper is configured.
           enable = lib.mkDefault (cfg.wallpapers != [ ]);
+          # Locally maintained copy (packages/linux-wallpaperengine.nix).
+          package = pkgs.local.linux-wallpaperengine;
 
           fps = 30;
           audio.silent = true;
