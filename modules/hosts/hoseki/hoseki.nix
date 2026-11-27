@@ -12,6 +12,8 @@
       traefik
       paperless
       file
+      grist
+      backup
     ];
 
     age.rekey.hostPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJy5D93Si0kwEHZ8krIPAMK6hB/FrSbigtCLDWe4Fjm5 cinnabar@nixos";

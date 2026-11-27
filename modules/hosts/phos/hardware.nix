@@ -22,6 +22,8 @@
         "/home" = {
           device = "/dev/disk/by-label/HOME";
           fsType = "ext4";
+          # Mounted in the initrd so agenix can read the identity in ~/.ssh during activation.
+          neededForBoot = true;
         };
 
         "/games" = {
