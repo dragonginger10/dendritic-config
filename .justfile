@@ -24,6 +24,10 @@ gc:
     echo "Cleaning ..."
     sudo nh clean all > /dev/null 2>&1
 
+# list packages installed on a host (flags: --all, --scope <s>, --json)
+pkgs target=host *flags:
+    nu scripts/pkgs.nu {{ target }} {{ flags }}
+
 test target=host:
     nh os build --show-trace --dry --hostname {{ target }}
     just gc
