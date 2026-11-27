@@ -13,7 +13,6 @@
           entryPoints = [ "websecure" ];
           service = "paperless";
           rule = "Host(`docs.dragonslibrary.xyz`)";
-          tls.certResolver = "le";
         };
       };
 
