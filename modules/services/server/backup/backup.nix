@@ -6,7 +6,9 @@
     { config, lib, ... }:
     let
       bucket = "hoseki-backups";
-      endpoint = "us-ord-1.linodeobjects.com";
+      # The bucket's own endpoint (E3 in us-ord), not the region's legacy us-ord-1 one:
+      # `s3_endpoint` of linode_object_storage_bucket.backups in hoseki-storage's state.
+      endpoint = "us-ord-10.linodeobjects.com";
       inherit (config.services) paperless grist filebrowser;
     in
     {
